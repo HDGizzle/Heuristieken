@@ -1,0 +1,2 @@
+states = []
+Class State(object):
