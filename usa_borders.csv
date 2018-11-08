@@ -1,0 +1,51 @@
+name,neighbors,sender
+Alabama,"Florida, Georgia, Mississippi, Tennessee",1
+Alaska,None,1
+Arizona,"California, Colorado, Nevada, New Mexico, Utah",1
+Arkansas,"Louisiana, Mississippi, Missouri, Oklahoma, Tennessee, Texas",1
+California,"Arizona, Nevada, Oregon",1
+Colorado,"Arizona, Kansas, Nebraska, New Mexico, Oklahoma, Utah, Wyoming",1
+Connecticut,"Massachusetts, New York, Rhode Island",1
+Delaware,"Maryland, New Jersey, Pennsylvania",1
+Florida,"Alabama, Georgia",1
+Georgia,"Alabama, Florida, North Carolina, South Carolina, Tennessee",1
+Hawaii,None,1
+Idaho,"Montana, Nevada, Oregon, Utah, Washington, Wyoming",1
+Illinois,"Indiana, Iowa, Michigan, Kentucky, Missouri, Wisconsin",1
+Indiana,"Illinois, Kentucky, Michigan, Ohio",1
+Iowa,"Illinois, Minnesota, Missouri, Nebraska, South Dakota, Wisconsin",1
+Kansas,"Colorado, Missouri, Nebraska, Oklahoma",1
+Kentucky,"Illinois, Indiana, Missouri, Ohio, Tennessee, Virginia, West Virginia",1
+Louisiana,"Arkansas, Mississippi, Texas",1
+Maine,New Hampshire,1
+Maryland,"Delaware, Pennsylvania, Virginia, West Virginia",1
+Massachusetts,"Connecticut, New Hampshire, New York, Rhode Island, Vermont",1
+Michigan,"Illinois, Indiana, Minnesota (water border), Ohio, Wisconsin",1
+Minnesota,"Iowa, Michigan (water border), North Dakota, South Dakota, Wisconsin",1
+Mississippi,"Alabama, Arkanssas, Louisiana, Tennessee",1
+Missouri,"Arkansas, Illinois, Iowa, Kansas, Kentucky, Nebraska, Oklahoma, Tennessee",1
+Montana,"Idaho, North Dakota, South Dakota, Wyoming",1
+Nebraska,"Colorado, Iowa, Kansas, Missouri, South Dakota, Wyoming",1
+Nevada,"Arizona, California, Idaho, Oregon, Utah",1
+New Hampshire,"Maine, Massachusetts, Vermont",1
+New Jersey,"Delaware, New York, Pennsylvania",1
+New Mexico,"Arizona, Colorado, Oklahoma, Texas, Utah",1
+New York,"Connecticut, Massachusetts, New Jersey, Pennsylvania, Rhode Island (water border), Vermont",1
+North Carolina,"Georgia, South Carolina, Tennessee, Virginia",1
+North Dakota,"Minnesota, Montana, South Dakota",1
+Ohio,"Indiana, Kentucky, Michigan, Pennsylvania, West Virginia",1
+Oklahoma,"Arkansas, Colorado, Kansas, Missouri, New Mexico, Texas",1
+Oregon,"California, Idaho, Nevada, Washington",1
+Pennsylvania,"Delaware, Maryland, New Jersey, New York, Ohio, West Virginia",1
+Rhode Island,"Connecticut, Massachusetts, New York (water border)",1
+South Carolina,"Georgia, North Carolina",1
+South Dakota,"Iowa, Minnesota, Montana, Nebraska, North Dakota, Wyoming",1
+Tennessee,"Alabama, Arkansas, Georgia, Kentucky, Mississippi, Missouri, North Carolina, Virginia",1
+Texas,"Arkansas, Louisiana, New Mexico, Oklahoma",1
+Utah,"Arizona, Colorado, Idaho, Nevada, New Mexico, Wyoming",1
+Vermont,"Massachusetts, New Hampshire, New York",1
+Virginia,"Kentucky, Maryland, North Carolina, Tennessee, West Virginia",1
+Washington,"Idaho, Oregon",1
+West Virginia,"Kentucky, Maryland, Ohio, Pennsylvania, Virginia",1
+Wisconsin,"Illinois, Iowa, Michigan, Minnesota",1
+Wyoming,"Colorado, Idaho, Montana, Nebraska, South Dakota, Utah",1
