@@ -41,7 +41,7 @@ def extract_provinces(dom):
         neighbors = columns[1].string.split(", ")
 
         # sender is initialised to one
-        sender = 1
+        sender = "None"
 
         # creates province object and adds it to dictionary
         province = Province(name, neighbors, sender)
