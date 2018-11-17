@@ -5,13 +5,14 @@ bordering provinces cannot have the same sender type
 
 # imports libraries
 import pandas
+import copy
 from province_class import Province
 from sender_class import Sender
 
 # define global variables
 SENDERS = {}
 PROVINCES = {}
-INPUT_CSV = "russia_borders.csv"
+INPUT_CSV = 'nederland.csv'
 
 
 def sender_initialiser():
@@ -20,7 +21,7 @@ def sender_initialiser():
     """
 
     # sender types range from A-G
-    sender_types = [1, 2, 3, 4, 5, 6, 7, 8]
+    sender_types = [1, 2, 3, 4, 5, 6, 7]
 
     # for first project sender costs are initialised to zero
     costs = 0
@@ -38,7 +39,7 @@ def province_initialiser():
 
     # opens csv file containing province data
     with open(INPUT_CSV) as myfile:
-        datafile = pandas.read_csv(myfile)
+        datafile = pandas.read_csv(myfile, delimiter=';') # delimiter=';'
 
         # iterates over rows in csv file
         for i in range(len(datafile)):
@@ -94,11 +95,16 @@ def welsh_powell(province_pools):
     http://mrsleblancsmath.pbworks.com/w/file/fetch/46119304/vertex%20coloring%20algorithm.pdf
     """
 
+    provinces_test = copy.deepcopy(PROVINCES)
+
     # lists all numbers of connections from high to low
     connections = sorted(province_pools, reverse=True)
 
+    senders_needed = 0
+
     # iterates over senders
     for sender in SENDERS:
+
         # iterates over province pools
         for connection in connections:
 
@@ -107,34 +113,26 @@ def welsh_powell(province_pools):
             for province_name in province_pool:
 
                 # extracts province object
-                province = PROVINCES[province_name]
+                province = provinces_test[province_name]
 
                 # check for presence of sender in neighbor
-                present = 0
+                present = False
 
                 # iterate over neighbors
                 for neighbor in province.neighbors:
 
                     # check if sender neighbor corresponds to current sender
-                    if PROVINCES[neighbor].sender == sender:
-                        present = 1
+                    if provinces_test[neighbor].sender == sender:
+                        present = True
 
                 # place sender if sender is not in neighbors
-                if present == 0:
+                if not present and not province.sender:
 
                     # place sender
                     province.sender = sender
+                    senders_needed = sender
 
-                    # remove province from pool
-                    province_pools[connection].remove(province_name)
-
-                    print(sender)
-
-                    # check if pool still contains provinces
-                    if len(province_pools[connection]) == 0:
-
-                        # if not skip pool
-                        connections.remove(connection)
+    print(senders_needed)
 
 
 if __name__ == "__main__":
@@ -149,22 +147,68 @@ if __name__ == "__main__":
     province_initialiser()
 
     # returns pools of provinces based on number of neighbors into dictionary
-    sorted_provs = neighbor_sorted_provinces()
+    province_pools = neighbor_sorted_provinces()
 
-    welsh_powell(sorted_provs)
+    # create a dictionary to keep track of all different sortings of each pool
+    pool_sorts = {}
 
-    # works out sender solutions
-    # welsh_powell()
-    for province in PROVINCES:
-        if not (PROVINCES[province].sender):
-            print('NEEN')
-            print(PROVINCES[province].name)
-        for neighbor in PROVINCES[province].neighbors:
-            if PROVINCES[neighbor].sender == PROVINCES[province].sender:
-                print('WERKT NIET')
-                print(f'{PROVINCES[neighbor].name}, {PROVINCES[province].name},\
-                {PROVINCES[province].sender}')
+    # sorts every pool by changing each position by 1 over length of list
+    for pool in province_pools:
 
-        # print(PROVINCES[province].name)
-    #     print(PROVINCES[province].sender)
-    #     # print(f'//PROVINCES[province]//')
+        # add sortings of each pool to list
+        pool_sorts[pool] = []
+
+        # number of variations equals length of list
+        len_list = len(province_pools[pool])
+
+        # create for every variation a list to be filled in differently ordered
+        for i in range(len_list):
+
+            # generates empty list
+            order = [None] * len_list
+
+            # fills in the list using different orders
+            for j in range(len_list):
+
+                # position of each name is moved by one every iteration of i
+                order[j] = province_pools[pool][(j + i) % (len_list)]
+
+            # add newly ordered pool to dictionary
+            pool_sorts[pool].append(order)
+
+    # keeps track of the number of countries in every individual pool
+    list_counter = []
+    list_cursor = [0] * len(province_pools)
+
+    # iterate over pool and save length of pool to list_counter
+    for pool in province_pools:
+        list_counter.append(len(province_pools[pool]) - 1)
+
+    # keeps track of
+    variation = 0
+    y = 0
+
+    # makes all possible combines of available sorts in pools
+    while list_counter[-1] >= list_cursor[-1]:
+
+        # generate a new dictionary for each iteration
+        dictionary = {}
+
+        for counter, pool in enumerate(province_pools):
+            dictionary[pool] = pool_sorts[pool][list_cursor[counter]]
+
+        # try a new variation
+        list_cursor[variation] += 1
+
+        # iterates over amount of pools
+        for i in range(1, len(province_pools)):
+
+            # if the cursor has finished all variations for a given pool, the
+            # cursor for the past pool is reset to zero and starts cursing in
+            # the new pool
+            if list_counter[i - 1] < list_cursor[i - 1]:
+                list_cursor[i] += 1
+                list_cursor[i - 1] = 0
+
+        # execute wellsh powel for the given variation
+        welsh_powell(dictionary)
