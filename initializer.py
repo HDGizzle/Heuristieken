@@ -48,7 +48,7 @@ def province_initialiser(INPUT_CSV):
 
 def sender_initialiser():
     """
-    initializes seven sendertypes and adds them to global dictionary
+    initializes seven sendertypes and adds them to dictionary
     """
     # dictionary containing all sender object with type as key
     senders = {}
