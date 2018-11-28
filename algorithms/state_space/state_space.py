@@ -28,11 +28,19 @@ def clusters(provinces, senders, province_pools):
                 # check if neighbor shares other neighbors with this province
                 if other_neighbor in provinces[province].neighbors:
 
-                    # check if other_neighbor fits with cluster_participants
+                    """
+                    check if other_neighbor shares all cluster_participants
+                    as neighbors
+                    """
                     cluster_check = []
+
+                    # check if new cluster is necessary
                     new_cluster = True
 
-                    # check if shared neighbor can be added to a shared cluster
+                    """
+                    check if shared neighbor can be added to an existing
+                    shared cluster
+                    """
                     for cluster in range(len(clusters_shared)):
                         for name in clusters_shared[cluster]:
 
@@ -40,14 +48,14 @@ def clusters(provinces, senders, province_pools):
                             if name in provinces[other_neighbor].neighbors:
                                 cluster_check.append(name)
 
-                        # check if cluster_check matches a shared clusters
+                        # check if cluster_check matches a shared cluster
                         if sorted(clusters_shared[cluster]) == sorted(cluster_check):
 
-                            # if so other_neighbor can be added to existing cluster
+                            # other_neighbor can be added to existing cluster
                             clusters_shared[cluster].append(other_neighbor)
                             new_cluster = False
 
-                    # if cluster check did not match an existing, new cluster is necessary
+                    # otherwise a new shared cluster is found
                     if new_cluster:
                         cluster_check.append(name)
                         clusters_shared.append(cluster_check)
@@ -56,50 +64,45 @@ def clusters(provinces, senders, province_pools):
             for cluster in range(len(clusters_shared)):
                 clusters.append(sorted(clusters_shared[cluster]))
 
-    # clusters final contain no duplicates
+    # create a final clusters list without duplicates
     clusters_final = []
     for cluster in range(len(clusters)):
         if not clusters[cluster] in clusters_final:
             print(clusters[cluster])
             clusters_final.append(clusters[cluster])
 
-    clusters_final = sorted(clusters_final, reverse=True)
     print(len(clusters_final))
+    clusters_final = sorted(clusters_final, reverse=True)
     return clusters_final
 
 
-# def lower_bound(provinces, senders):
-#     """
-#     calculates the lower bound of the state space based on the maximum amount
-#     of interconnections encountered in a cluster
-#     """
-#
-#     # max interconnections is contained in the keys of cluster_pools
-#     cluster_pools = clusters(provinces)
-#     min_senders = sorted(cluster_pools, reverse=True)[0]
-#
-#     # the amount of senders for use is based on the minimum amount needed
-#     senders_available = {}
-#     for type in senders:
-#
-#         # adds senders to sender available based on amount needed
-#         if type <= min_senders:
-#             senders_available[type] = senders[type]
-#
-#     # iterate over provinces in pools starting at highest interconnections
-#     for pool in sorted(cluster_pools, reverse=True):
-#         for cluster in cluster_pools[pool]:
-#             for province in cluster_pools[pool][cluster]:
-#
-#                 # check if amount of options is already assigned
-#                 if not provinces[province].sender_options:
-#
-#                     # options available are is dependent on amount available
-#                     options = min_senders
+def lower_bound(provinces, senders, cluster_pools):
+    """
+    calculates the lower bound of the state space based on the maximum amount
+    of interconnections encountered in a cluster
+    """
 
+    # max interconnections is contained in the keys of cluster_pools
+    min_senders = sorted(cluster_pools, reverse=True)[0]
+
+    # the amount of senders for use is based on the minimum amount needed
+    for cluster in range(len(cluster_pools)):
+        senders_allowed = len(cluster_pools[cluster])
+        for province in cluster_pools[cluster]:
+            if not provinces[province].sender_options:
+                additional_constraint = 0
+                for neighbor in provinces[province].neighbors:
+                    if provinces[province].neighbors:
+                        additional_constraint += 1
+                provinces[province].sender_options = senders_allowed - additional_constraint
+                senders_allowed -= 1
+                if provinces[province].sender_options < 0:
+                    print(provinces[province].name)
+                    print()
 
 def cluster_partipication(provinces, senders, province_pools):
     cluster_pools = clusters(provinces, senders, province_pools)
+    lower_bound(provinces, senders, cluster_pools)
 
 
 def state_space(provinces, senders):

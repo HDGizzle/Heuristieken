@@ -8,9 +8,9 @@ http://mrsleblancsmath.pbworks.com/w/file/fetch/46119304/vertex%20coloring%20alg
 import copy
 
 
-def welsh_powell(province_pools, PROVINCES, SENDERS):
+def welsh_powell(province_pools, provinces, senders):
 
-    provinces_copy = copy.deepcopy(PROVINCES)
+    provinces_copy = copy.deepcopy(provinces)
 
     # lists all numbers of connections from high to low
     connections = sorted(province_pools, reverse=True)
@@ -18,7 +18,7 @@ def welsh_powell(province_pools, PROVINCES, SENDERS):
     senders_needed = 0
 
     # iterates over senders
-    for sender in SENDERS:
+    for sender in senders:
 
         # iterates over province pools
         for connection in connections:
@@ -37,16 +37,18 @@ def welsh_powell(province_pools, PROVINCES, SENDERS):
                 for neighbor in province.neighbors:
 
                     # check if sender neighbor corresponds to current sender
-                    if provinces_copy[neighbor].sender == sender:
-                        present = True
+                    if provinces_copy[neighbor].sender:
+                        if provinces_copy[neighbor].sender.type == sender:
+                            present = True
 
                 # place sender if sender is not in neighbors
                 if not present and not province.sender:
 
                     # place sender
-                    province.sender = sender
+                    province.sender = senders[sender]
                     senders_needed = sender
 
+    total_costs(provinces_copy)
     print(senders_needed)
 
 
@@ -123,3 +125,13 @@ def welsh_powell_variation(province_pools, PROVINCES, SENDERS):
 
         # execute wellsh powel for the given variation
         welsh_powell(variation_prov_pool, PROVINCES, SENDERS)
+
+
+def total_costs(provinces):
+    """
+    this function returns the total amount of costs given the senders placed
+    """
+    costs = 0
+    for province in provinces:
+        costs += provinces[province].sender.costs
+    print(costs)
