@@ -15,7 +15,7 @@ import initialiser as init
 import state_space as state
 
 # define global variables
-INPUT_CSV = 'nederland.csv'
+INPUT_CSV = 'russia_borders.csv'
 PROVINCES = init.province_initialiser(INPUT_CSV)
 SENDERS = init.sender_initialiser()
 
@@ -35,3 +35,10 @@ if __name__ == "__main__":
 
     # uses the wellsh powel function to test different variations of pool sorts
     welsh_powell_variation(province_pools, PROVINCES, SENDERS)
+
+    def total_costs(provinces):
+        costs = 0
+        for province in provinces:
+            costs += provinces[province].sender.costs
+
+        print(costs)

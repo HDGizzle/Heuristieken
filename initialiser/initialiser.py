@@ -60,13 +60,11 @@ def sender_initialiser():
 
     # sender types range from A-G
     sender_types = [1, 2, 3, 4, 5, 6, 7]
-
-    # for first project sender costs are initialised to zero
-    costs = 0
+    sender_costs = [12,	26,	27,	30,	37,	39,	41]
 
     # adds all different sender type objects to SENDERS
-    for char in sender_types:
-        senders[char] = Sender(char, costs)
+    for i in range(len(sender_types)):
+        senders[sender_types[i]] = Sender(sender_types[i], sender_costs[i])
 
     # return dictionary containing sender objects
     return senders
@@ -100,3 +98,13 @@ def neighbor_sorted_provinces(provinces):
 
     # returns sorted pools dictionary
     return connections_sort
+
+
+def total_costs(provinces):
+    """
+    this function returns the total amount of costs given the senders placed
+    """
+    costs = 0
+    for province in provinces:
+        costs += provinces[province].sender.costs
+    print(costs)
