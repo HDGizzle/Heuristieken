@@ -6,7 +6,6 @@ this script scrapes data on USA states and borders
 """
 
 # imports libraries
-import re
 import csv
 from province_class import Province
 from requests import get
@@ -22,8 +21,9 @@ def extract_provinces(dom):
     """
     extract all relevant movie information on htmlpage
     """
+
     # parse the HTML file into a DOM representation
-    tables = dom.find_all("table", {"class":"content4"})
+    tables = dom.find_all("table", {"class": "content4"})
     rows = tables[0].find_all("tr")
     rows.pop(0)
 
@@ -40,11 +40,17 @@ def extract_provinces(dom):
         # neighbors are saved in a list
         neighbors = columns[1].string.split(", ")
 
-        # sender is initialised to one
-        sender = 1
+        for i in range(len(neighbors)):
+            neighbors[i] = neighbors[i].split(' (')[0]
+            if neighbors[i] == 'Arkanssas':
+                neighbors[i] = 'Arkansas'
+
+        # ensures None is not recorded as a neighbor
+        if neighbors[0] in "None":
+            neighbors = []
 
         # creates province object and adds it to dictionary
-        province = Province(name, neighbors, sender)
+        province = Province(name, neighbors)
         provinces[name] = province
 
     # returns dictionary of provinces
@@ -57,14 +63,14 @@ def save_csv(outfile, provinces):
     """
     writer = csv.writer(outfile)
 
-    writer.writerow(["name", "neighbors", "sender"])
+    writer.writerow(["name", "neighbors"])
     provinces_list = []
     neighbors = ", "
 
     for key in provinces:
         province = provinces[key]
         provinces_list.append([province.name, \
-                    neighbors.join(province.neighbors), province.sender])
+                    neighbors.join(province.neighbors)])
 
     writer.writerows(provinces_list)
 

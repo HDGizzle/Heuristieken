@@ -5,7 +5,8 @@ elements included are:
 - sender costs
 """
 
-class sender(object):
+
+class Sender():
 
     # sender objects consist of type and costs
     def __init__(self, type, costs):

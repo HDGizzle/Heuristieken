@@ -1,0 +1,95 @@
+name,neighbors
+"Belgorod Oblast
+","Voronezh Oblast, Kursk Oblast"
+"Bryansk Oblast
+","Smolensk Oblast, Kursk Oblast, Oryol Oblast, Kaluga Oblast"
+"Vladimir Oblast
+","Ivanovo Oblast, Moscow Oblast, Nizhny Novgorod Oblast, Ryazan Oblast, Yaroslavl Oblast"
+"Voronezh Oblast
+","Belgorod Oblast, Volgograd Oblast, Kursk Oblast, Lipetsk Oblast, Tambov Oblast, Saratov Oblast, Rostov Oblast"
+"Ivanovo Oblast
+","Yaroslavl Oblast, Nizhny Novgorod Oblast, Vladimir Oblast, Kostroma Oblast"
+"Kaluga Oblast
+","Bryansk Oblast, Moscow Oblast, Oryol Oblast, Smolensk Oblast, Tula Oblast"
+"Kostroma Oblast
+","Nizhny Novgorod Oblast, Yaroslavl Oblast, Vologda Oblast, Kirov Oblast, Ivanovo Oblast"
+"Kursk Oblast
+","Belgorod Oblast, Bryansk Oblast, Voronezh Oblast, Lipetsk Oblast, Oryol Oblast"
+"Lipetsk Oblast
+","Tambov Oblast, Kursk Oblast, Voronezh Oblast, Ryazan Oblast, Oryol Oblast, Tula Oblast"
+"Moscow Oblast
+","Vladimir Oblast, Kaluga Oblast, Smolensk Oblast, Ryazan Oblast, Tver Oblast, Tula Oblast, Yaroslavl Oblast"
+"Oryol Oblast
+","Bryansk Oblast, Kaluga Oblast, Kursk Oblast, Lipetsk Oblast, Tula Oblast"
+"Ryazan Oblast
+","Vladimir Oblast, Lipetsk Oblast, Moscow Oblast, Nizhny Novgorod Oblast, Tambov Oblast, Tula Oblast, Penza Oblast"
+"Smolensk Oblast
+","Bryansk Oblast, Kaluga Oblast, Moscow Oblast, Pskov Oblast, Tver Oblast"
+"Tambov Oblast
+","Voronezh Oblast, Lipetsk Oblast, Penza Oblast, Ryazan Oblast, Saratov Oblast"
+"Tver Oblast
+","Vologda Oblast, Moscow Oblast, Novgorod Oblast, Pskov Oblast, Smolensk Oblast, Yaroslavl Oblast"
+"Tula Oblast
+","Kaluga Oblast, Lipetsk Oblast, Moscow Oblast, Oryol Oblast, Ryazan Oblast"
+"Yaroslavl Oblast
+","Vologda Oblast, Ivanovo Oblast, Vladimir Oblast, Tver Oblast, Moscow Oblast, Kostroma Oblast"
+"Arkhangelsk Oblast
+","Vologda Oblast, Kirov Oblast"
+"Vologda Oblast
+","Arkhangelsk Oblast, Kirov Oblast, Kostroma Oblast, Leningrad Oblast, Novgorod Oblast, Tver Oblast, Yaroslavl Oblast"
+"Kaliningrad Oblast
+",
+"Leningrad Oblast
+","Vologda Oblast, Novgorod Oblast, Pskov Oblast"
+"Murmansk Oblast
+",
+"Novgorod Oblast
+","Vologda Oblast, Leningrad Oblast, Pskov Oblast, Tver Oblast"
+"Pskov Oblast
+","Leningrad Oblast, Novgorod Oblast, Tver Oblast, Smolensk Oblast"
+"Kirov Oblast
+","Arkhangelsk Oblast, Vologda Oblast, Nizhny Novgorod Oblast, Kostroma Oblast"
+"Nizhny Novgorod Oblast
+","Kostroma Oblast, Ivanovo Oblast, Vladimir Oblast, Kirov Oblast, Ryazan Oblast"
+"Orenburg Oblast
+","Samara Oblast, Chelyabinsk Oblast"
+"Penza Oblast
+","Ryazan Oblast, Saratov Oblast, Tambov Oblast, Ulyanovsk Oblast"
+"Samara Oblast
+","Orenburg Oblast, Saratov Oblast, Ulyanovsk Oblast"
+"Saratov Oblast
+","Volgograd Oblast, Voronezh Oblast, Penza Oblast, Samara Oblast, Tambov Oblast, Ulyanovsk Oblast"
+"Ulyanovsk Oblast
+","Penza Oblast, Samara Oblast, Saratov Oblast"
+"Astrakhan Oblast
+",Volgograd Oblast
+"Volgograd Oblast
+","Astrakhan Oblast, Rostov Oblast, Saratov Oblast, Voronezh Oblast"
+"Rostov Oblast
+","Volgograd Oblast, Voronezh Oblast"
+"Kurgan Oblast
+","Sverdlovsk Oblast, Chelyabinsk Oblast"
+"Sverdlovsk Oblast
+","Kurgan Oblast, Tyumen Oblast, Chelyabinsk Oblast"
+"Tyumen Oblast
+","Kurgan Oblast, Omsk Oblast, Sverdlovsk Oblast, Tomsk Oblast"
+"Chelyabinsk Oblast
+","Kurgan Oblast, Orenburg Oblast, Sverdlovsk Oblast"
+"Irkutsk Oblast
+",
+"Kemerovo Oblast
+","Novosibirsk Oblast, Tomsk Oblast"
+"Novosibirsk Oblast
+","Kemerovo Oblast, Omsk Oblast, Tomsk Oblast"
+"Omsk Oblast
+","Novosibirsk Oblast, Tomsk Oblast, Tyumen Oblast"
+"Tomsk Oblast
+","Kemerovo Oblast, Novosibirsk Oblast, Omsk Oblast, Tyumen Oblast"
+"Amur Oblast
+",Jewish Autonomous Oblast
+"Magadan Oblast
+",
+"Sakhalin Oblast
+",
+"Jewish Autonomous Oblast
+",Amur Oblast

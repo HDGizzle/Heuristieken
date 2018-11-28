@@ -1,2 +1,0 @@
-states = []
-Class State(object):
