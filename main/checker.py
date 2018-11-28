@@ -36,3 +36,22 @@ def cost_calculator(provinces):
         costs += provinces[province].sender.costs
 
     return costs
+
+
+def province_reset(provinces):
+    """
+    takes all senders in the provinces away
+    """
+    for province in provinces:
+        provinces[province].sender = None
+
+
+def save_outcome(provinces):
+    """
+    saves the outcome with the provinces and senders placed
+    """
+    outcome = {}
+    for province in provinces:
+        outcome[province] = provinces[province].sender.type
+
+    return outcome
