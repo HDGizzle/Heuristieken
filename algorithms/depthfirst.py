@@ -28,29 +28,34 @@ while len(visited) != len(provinces):  # zolang er unvisited provinces zijn
 
                 stack[-1].sender = temp[0]  # gebruik eerste zender uit de lijst met ongebruikte zendtypes om minimaal aantal verschillende zenders te gebruiken
 
-            if all neighbors in visited:
-                pop(stack[-1])          # als alle buren in visited zijn zit je klem en moet je stapje terug, begin weer bovenaan while loop
+            for neighbor in neighbors:
+                if neighbor in visited:
+                    pop(stack[-1])          # als alle buren in visited zijn zit je klem en moet je stapje terug, begin weer bovenaan while loop
+
+
+            # if all neighbors in visited:
+            #     pop(stack[-1])          # als alle buren in visited zijn zit je klem en moet je stapje terug, begin weer bovenaan while loop
 
             else:
                 list = []                     # selectie met buren die nog niet visited zijn
-                for neighbor in neighbors
+                for neighbor in neighbors:
                     if neighbor not in visited:
                         list.append(neighbor)
 
-                stack.append(random provincie uit lijst) # begint bovenaan while loop en dit wordt de nieuwe stack[-1]
+                stack.append(list[0]) # begint bovenaan while loop en dit wordt de nieuwe stack[-1]
 
 
-
-    else:                           # als je wel een stap terug hebt genomen doe je dit
-        for neighbors in stack[-1]:
-
-            if all neighbors in visited:
-                pop(stack[-1])          # als alle buren in visited zijn zit je klem en moet je stapje terug, begin weer bovenaan while loop
-
-            else:
-                lijst = []                      # selectie met buren die nog niet visited zijn
-                for neighbor in neighbors
-                    if neighbor not in visited:
-                        lijst.append(neighbor)
-
-                stack.append(random lijst provincie)    # begint bovenaan while loop en dit wordt de nieuwe stack[-1]
+    #
+    # else:                           # als je wel een stap terug hebt genomen doe je dit
+    #     for neighbors in stack[-1]:
+    #
+    #         if all neighbors in visited:
+    #             pop(stack[-1])          # als alle buren in visited zijn zit je klem en moet je stapje terug, begin weer bovenaan while loop
+    #
+    #         else:
+    #             lijst = []                      # selectie met buren die nog niet visited zijn
+    #             for neighbor in neighbors
+    #                 if neighbor not in visited:
+    #                     lijst.append(neighbor)
+    #
+    #             stack.append(random lijst provincie)    # begint bovenaan while loop en dit wordt de nieuwe stack[-1]
