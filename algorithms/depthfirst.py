@@ -19,15 +19,18 @@ while len(visited) != len(provinces):  # zolang er unvisited provinces zijn
     if provinces[stack[-1]].sender == None:       # mocht je geen stap terug hebben genomen wil je deze loop in gaan
 
         visited.append(stack[-1])           # je gaat een zender toevoegen dus append je hem alvast aan visited
+
         for neighbor in provinces[stack[-1]].neighbors:
 
             temp = ["A", "B", "C", "D", "E", "F", "G"]
          # tijdelijk om een lijst met ongebruikte zendtypes over te houden
             for sendtype in sendtypes:
-                if provinces[neighbor].sender == sendtype:
-                    temp.remove(sendtype)
 
-            provinces[stack[-1]].sender = temp[0]  # gebruik eerste zender uit de lijst met ongebruikte zendtypes om minimaal aantal verschillende zenders te gebruiken
+                if provinces[neighbor].sender == sendtype:
+                    # print(sendtype)
+                    temp.remove(sendtype)
+                    print(temp)
+                provinces[stack[-1]].sender = temp[0]  # gebruik eerste zender uit de lijst met ongebruikte zendtypes om minimaal aantal verschillende zenders te gebruiken
 
         count = 0
         for neighbor in provinces[stack[-1]].neighbors:
