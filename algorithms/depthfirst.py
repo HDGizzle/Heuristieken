@@ -1,4 +1,9 @@
-import initializer as init
+import os
+import sys
+basepath = os.path.abspath(os.path.curdir).split("Heuristieken")[0] + "Heuristieken"
+sys.path.append(os.path.join(basepath, r"initialiser"))
+sys.path.append(os.path.join(basepath, r"initialiser/data"))
+from initialiser import province_initialiser as init
 import random
 import math
 
@@ -7,14 +12,12 @@ import math
 provinces = init.province_initialiser("nederland.csv")
 sendtypes = ["A", "B", "C", "D", "E", "F", "G"]
 
-
-
-visited = [] # blijft intact
-stack = [] # wordt gepopt, staat een beginprovince in
+visited = []  # blijft intact
+stack = []  # wordt gepopt, staat een beginprovince in
 
 while len(visited) != len(provinces):  # zolang er unvisited provinces zijn
 
-    if stack[-1].sender == None:       # mocht je geen stap terug hebben genomen wil je deze loop in gaan
+    if stack[-1].sender is None:       # mocht je geen stap terug hebben genomen wil je deze loop in gaan
 
         visited.append(stack[-1])           # je gaat een zender toevoegen dus append je hem alvast aan visited
         for neighbors in stack[-1]:
@@ -30,7 +33,7 @@ while len(visited) != len(provinces):  # zolang er unvisited provinces zijn
 
             for neighbor in neighbors:
                 if neighbor in visited:
-                    pop(stack[-1])          # als alle buren in visited zijn zit je klem en moet je stapje terug, begin weer bovenaan while loop
+                    stack.pop(stack[-1])          # als alle buren in visited zijn zit je klem en moet je stapje terug, begin weer bovenaan while loop
 
 
             # if all neighbors in visited:
