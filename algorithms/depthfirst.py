@@ -15,6 +15,7 @@ print(provinces[stack[-1]].sender)
 print(len(provinces))
 
 while len(visited) != len(provinces):  # zolang er unvisited provinces zijn
+    temp = sendtypes
 
     if provinces[stack[-1]].sender == None:       # mocht je geen stap terug hebben genomen wil je deze loop in gaan
 
@@ -22,15 +23,11 @@ while len(visited) != len(provinces):  # zolang er unvisited provinces zijn
 
         for neighbor in provinces[stack[-1]].neighbors:
 
-            temp = ["A", "B", "C", "D", "E", "F", "G"]
          # tijdelijk om een lijst met ongebruikte zendtypes over te houden
-            for sendtype in sendtypes:
-
-                if provinces[neighbor].sender == sendtype:
-                    # print(sendtype)
-                    temp.remove(sendtype)
-                    print(temp)
-                provinces[stack[-1]].sender = temp[0]  # gebruik eerste zender uit de lijst met ongebruikte zendtypes om minimaal aantal verschillende zenders te gebruiken
+            if provinces[neighbor].sender in temp:
+                # print(sendtype)
+                temp.remove(provinces[neighbor].sender)
+            provinces[stack[-1]].sender = temp[0]  # gebruik eerste zender uit de lijst met ongebruikte zendtypes om minimaal aantal verschillende zenders te gebruiken
 
         count = 0
         for neighbor in provinces[stack[-1]].neighbors:
