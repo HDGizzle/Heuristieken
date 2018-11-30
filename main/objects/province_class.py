@@ -35,13 +35,11 @@ class Province():
                 for neighbor in self.neighbors:
 
                     # if sender is with neighbor, sender cannot be used
-                    if sender == provinces[neighbor].sender:
-                        usable = False
+                    if provinces[neighbor].sender:
+                        if sender == provinces[neighbor].sender.type:
+                            usable = False
 
                 # places sender if usable
                 if usable:
-                    self.sender = sender
-                    if sender > 3:
-                        print(self.name)
-                        print(sender)
+                    self.sender = senders[sender]
                     break
