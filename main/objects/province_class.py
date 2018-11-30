@@ -17,7 +17,6 @@ class Province():
         self.name = name
         self.neighbors = neighbors
         self.sender = None
-        self.sender_options = None
 
     def sender_placer(self, provinces, senders):
         """
