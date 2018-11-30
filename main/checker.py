@@ -25,7 +25,7 @@ def save_outcome(provinces):
     return outcome
 
 
-def sender_checker(provinces):
+def validity_check(provinces):
     """
     checks if outcome is valid by checking senders on constraints
     """
