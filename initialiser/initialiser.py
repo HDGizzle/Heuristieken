@@ -8,7 +8,7 @@ connections
 import os
 import sys
 basepath = os.path.abspath(os.path.curdir).split("Heuristieken")[0] + "Heuristieken"
-sys.path.append(os.path.join(basepath, r"main\objects"))
+sys.path.append(os.path.join(basepath, "main", "objects"))
 sys.path.append(os.path.join(os.path.abspath(os.path.curdir), "data"))
 import pandas
 from province_class import Province
@@ -25,7 +25,7 @@ def province_initialiser(INPUT_CSV):
     provinces = {}
 
     # opens csv file containing province data
-    with open(os.path.join(basepath, r"initialiser\data", INPUT_CSV)) as myfile:
+    with open(os.path.join(basepath, "initialiser", "data", INPUT_CSV)) as myfile:
 
         # checks which csv is imported
         if 'nederland.csv' in INPUT_CSV:
