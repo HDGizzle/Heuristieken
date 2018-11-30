@@ -59,19 +59,11 @@ def clusters(provinces):
 
 def state_space(provinces):
     """
-    this function calculates the approximation of the upper and lower bounds of
-    the state space given the constraints for the assignment.
-    The upper bound is defined as the range of options possible with all 7
-    senders, whereas the lower bound is the maximum amount of combinations
-    possible under constraints with the minimum amount of senders needed based
-    on the amount of interconnections
+    this function calculates the total state space, which is the amount of
+    senders (7) to the power of the amount of provinces
     """
+    all_possibilities = 1
+    for i in range(len(provinces)):
+        all_possibilities = all_possibilities * 7
 
-    cluster_pools = clusters(provinces)
-
-    """
-    minimum senders needed is the key of the pool containing the most
-    interconnected provinces
-    """
-    min_senders = sorted(cluster_pools, reverse=True)[0]
-    print(min_senders)
+    return all_possibilities
