@@ -1,29 +1,16 @@
-<<<<<<< HEAD
 import os
 import sys
 basepath = os.path.abspath(os.path.curdir).split("Heuristieken")[0] + "Heuristieken"
-sys.path.append(os.path.join(basepath, r"initialiser"))
-sys.path.append(os.path.join(basepath, r"initialiser/data"))
-from initialiser import province_initialiser as init
-=======
-import initialiser as init
->>>>>>> ff26648224e89c3a5416c544d567d0895a573371
+sys.path.append(os.path.join(basepath, "initialiser"))
+sys.path.append(os.path.join(basepath, "initialiser", "data"))
+import initialiser
 import random
 import math
 
 
 # define province dictionary and different senders
-provinces = init.province_initialiser("usa_borders.csv")
+provinces = initialiser.province_initialiser("usa_borders.csv")
 sendtypes = ["A", "B", "C", "D", "E", "F", "G"]
-
-<<<<<<< HEAD
-visited = []  # blijft intact
-stack = []  # wordt gepopt, staat een beginprovince in
-
-while len(visited) != len(provinces):  # zolang er unvisited provinces zijn
-
-    if stack[-1].sender is None:       # mocht je geen stap terug hebben genomen wil je deze loop in gaan
-=======
 
 visited = [] # blijft intact
 stack = ["Wyoming"] # wordt gepopt, staat een beginprovince in
@@ -42,7 +29,6 @@ while len(visited) != len(provinces):  # zolang er unvisited provinces zijn
     temp = ["A", "B", "C", "D", "E", "F", "G"]
 
     if provinces[stack[-1]].sender == None:       # mocht je geen stap terug hebben genomen wil je deze loop in gaan
->>>>>>> ff26648224e89c3a5416c544d567d0895a573371
 
         visited.append(stack[-1])           # je gaat een zender toevoegen dus append je hem alvast aan visited
 
@@ -70,17 +56,7 @@ while len(visited) != len(provinces):  # zolang er unvisited provinces zijn
                 if neighbor not in visited:
                     list.append(neighbor)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-            for neighbor in neighbors:
-                if neighbor in visited:
-                    stack.pop(stack[-1])          # als alle buren in visited zijn zit je klem en moet je stapje terug, begin weer bovenaan while loop
-=======
-            stack.append(list[0]) # begint bovenaan while loop en dit wordt de nieuwe stack[-1]
->>>>>>> ff26648224e89c3a5416c544d567d0895a573371
-=======
             stack.append(random.choice(list)) # begint bovenaan while loop en dit wordt de nieuwe stack[-1]
->>>>>>> 0af3b7378bf7a94ab83339e09144ee6f2aab5e14
 
 
     else:                           # als je wel een stap terug hebt genomen doe je dit
