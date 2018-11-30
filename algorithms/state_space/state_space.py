@@ -1,7 +1,3 @@
-import copy
-import collections as clc
-
-
 def clusters(provinces, senders, province_pools):
     """
     finds all clusters of provinces based on interconnections, i.e. neighbors
