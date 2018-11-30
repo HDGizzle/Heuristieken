@@ -64,10 +64,8 @@ def clusters(provinces, senders, province_pools):
     clusters_final = []
     for cluster in range(len(clusters)):
         if not clusters[cluster] in clusters_final:
-            print(clusters[cluster])
             clusters_final.append(clusters[cluster])
 
-    print(len(clusters_final))
     clusters_final = sorted(clusters_final, reverse=True)
     return clusters_final
 
