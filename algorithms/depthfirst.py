@@ -1,9 +1,13 @@
+<<<<<<< HEAD
 import os
 import sys
 basepath = os.path.abspath(os.path.curdir).split("Heuristieken")[0] + "Heuristieken"
 sys.path.append(os.path.join(basepath, r"initialiser"))
 sys.path.append(os.path.join(basepath, r"initialiser/data"))
 from initialiser import province_initialiser as init
+=======
+import initialiser as init
+>>>>>>> ff26648224e89c3a5416c544d567d0895a573371
 import random
 import math
 
@@ -12,53 +16,77 @@ import math
 provinces = init.province_initialiser("nederland.csv")
 sendtypes = ["A", "B", "C", "D", "E", "F", "G"]
 
+<<<<<<< HEAD
 visited = []  # blijft intact
 stack = []  # wordt gepopt, staat een beginprovince in
 
 while len(visited) != len(provinces):  # zolang er unvisited provinces zijn
 
     if stack[-1].sender is None:       # mocht je geen stap terug hebben genomen wil je deze loop in gaan
+=======
+
+visited = [] # blijft intact
+stack = ["Groningen"] # wordt gepopt, staat een beginprovince in
+print(provinces["Friesland"].sender)
+print(provinces[stack[-1]].sender)
+print(len(provinces))
+
+while len(visited) != len(provinces):  # zolang er unvisited provinces zijn
+
+    if provinces[stack[-1]].sender == None:       # mocht je geen stap terug hebben genomen wil je deze loop in gaan
+>>>>>>> ff26648224e89c3a5416c544d567d0895a573371
 
         visited.append(stack[-1])           # je gaat een zender toevoegen dus append je hem alvast aan visited
-        for neighbors in stack[-1]:
+        for neighbor in provinces[stack[-1]].neighbors:
 
+            temp = ["A", "B", "C", "D", "E", "F", "G"]
+         # tijdelijk om een lijst met ongebruikte zendtypes over te houden
             for sendtype in sendtypes:
+                if provinces[neighbor].sender == sendtype:
+                    temp.remove(sendtype)
 
-                temp = sendtypes         # tijdelijk om een lijst met ongebruikte zendtypes over te houden
-                for neighbor in neighbors:
-                    if neighbor.sender == sendtype:
-                        temp.remove(sendtype)
+            provinces[stack[-1]].sender = temp[0]  # gebruik eerste zender uit de lijst met ongebruikte zendtypes om minimaal aantal verschillende zenders te gebruiken
 
-                stack[-1].sender = temp[0]  # gebruik eerste zender uit de lijst met ongebruikte zendtypes om minimaal aantal verschillende zenders te gebruiken
+        count = 0
+        for neighbor in provinces[stack[-1]].neighbors:
+            if neighbor in visited:
+                count = count + 1
 
+        if count == len(provinces[stack[-1]].neighbors):
+            stack.pop()
+                         # als alle buren in visited zijn zit je klem en moet je stapje terug, begin weer bovenaan while loop
+        else:
+            list = []                     # selectie met buren die nog niet visited zijn
+            for neighbor in provinces[stack[-1]].neighbors:
+                if neighbor not in visited:
+                    list.append(neighbor)
+
+<<<<<<< HEAD
             for neighbor in neighbors:
                 if neighbor in visited:
                     stack.pop(stack[-1])          # als alle buren in visited zijn zit je klem en moet je stapje terug, begin weer bovenaan while loop
+=======
+            stack.append(list[0]) # begint bovenaan while loop en dit wordt de nieuwe stack[-1]
+>>>>>>> ff26648224e89c3a5416c544d567d0895a573371
 
 
-            # if all neighbors in visited:
-            #     pop(stack[-1])          # als alle buren in visited zijn zit je klem en moet je stapje terug, begin weer bovenaan while loop
+    else:                           # als je wel een stap terug hebt genomen doe je dit
+        count = 0
+        for neighbor in provinces[stack[-1]].neighbors:
+            if neighbor in visited:
+                count = count + 1
 
-            else:
-                list = []                     # selectie met buren die nog niet visited zijn
-                for neighbor in neighbors:
-                    if neighbor not in visited:
-                        list.append(neighbor)
+        if count == len(provinces[stack[-1]].neighbors):
+            stack.pop()
+                         # als alle buren in visited zijn zit je klem en moet je stapje terug, begin weer bovenaan while loop
+        else:
+            list = []                     # selectie met buren die nog niet visited zijn
+            for neighbor in provinces[stack[-1]].neighbors:
+                if neighbor not in visited:
+                    list.append(neighbor)
 
-                stack.append(list[0]) # begint bovenaan while loop en dit wordt de nieuwe stack[-1]
+            stack.append(list[0]) # begint bovenaan while loop en dit wordt de nieuwe stack[-1]
 
+for province in provinces:
 
-    #
-    # else:                           # als je wel een stap terug hebt genomen doe je dit
-    #     for neighbors in stack[-1]:
-    #
-    #         if all neighbors in visited:
-    #             pop(stack[-1])          # als alle buren in visited zijn zit je klem en moet je stapje terug, begin weer bovenaan while loop
-    #
-    #         else:
-    #             lijst = []                      # selectie met buren die nog niet visited zijn
-    #             for neighbor in neighbors
-    #                 if neighbor not in visited:
-    #                     lijst.append(neighbor)
-    #
-    #             stack.append(random lijst provincie)    # begint bovenaan while loop en dit wordt de nieuwe stack[-1]
+    print(provinces[province].sender, province)
