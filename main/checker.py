@@ -113,16 +113,16 @@ def enhanced_distribution(outcome, benchmark_outcome):
     better_outcome = False
 
     # obtains sender types used and variances
-    used = types_used(outcome)
-    benchmark_used = types_used(benchmark_outcome)
+    used = len(types_used(outcome))
+    benchmark_used = len(types_used(benchmark_outcome))
     current_var = sender_variance(outcome)
     benchmark_var = sender_variance(benchmark_outcome)
 
     # checks if senders used does not exceed benchmark
-    if not len(used) > len(benchmark_used):
+    if not used > benchmark_used:
 
         # outcome is better with less senders used or lower variance
-        if len(used) < len(benchmark_used) or current_var < benchmark_var:
+        if used < benchmark_used or current_var < benchmark_var:
             better_outcome = True
 
     return better_outcome
