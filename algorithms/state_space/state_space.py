@@ -76,46 +76,14 @@ def clusters(provinces, senders, province_pools):
     return clusters_final
 
 
-def lower_bound(provinces, senders, cluster_pools):
-    """
-    calculates the lower bound of the state space based on the maximum amount
-    of interconnections encountered in a cluster
-    """
-
-    # max interconnections is contained in the keys of cluster_pools
-    min_senders = sorted(cluster_pools, reverse=True)[0]
-
-    # the amount of senders for use is based on the minimum amount needed
-    for cluster in range(len(cluster_pools)):
-        senders_allowed = len(cluster_pools[cluster])
-        for province in cluster_pools[cluster]:
-            if not provinces[province].sender_options:
-                additional_constraint = 0
-                for neighbor in provinces[province].neighbors:
-                    if provinces[province].neighbors:
-                        additional_constraint += 1
-                provinces[province].sender_options = senders_allowed - additional_constraint
-                senders_allowed -= 1
-                if provinces[province].sender_options < 0:
-                    print(provinces[province].name)
-                    print()
-
-def cluster_partipication(provinces, senders, province_pools):
-    cluster_pools = clusters(provinces, senders, province_pools)
-    lower_bound(provinces, senders, cluster_pools)
-
-
 def state_space(provinces, senders):
     """
-    this function calculates the approximation of the upper and lower bounds of
-    the state space given the constraints for the assignment.
-    The upper bound is defined as the range of options possible with all 7
-    senders, whereas the lower bound is the maximum amount of combinations
-    possible under constraints with the minimum amount of senders needed based
-    on the amount of interconnections
+    this function calculates the total state space, which is the amount of
+    senders (7) to the power of the amount of provinces
     """
+    all_possibilities = 1
+    senders_amount = len(senders)
+    for i in range(len(provinces)):
+        all_possibilities = all_possibilities * senders_amount
 
-    # lower = lower_bound(provinces, senders)
-    # upper = upper_bound(provinces, senders)
-
-    # return ([lower, upper])
+    return all_possibilities
