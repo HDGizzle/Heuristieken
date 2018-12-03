@@ -7,8 +7,8 @@ bordering provinces cannot have the same sender type
 import os
 import sys
 basepath = os.path.abspath(os.path.curdir).split("Heuristieken")[0] + "Heuristieken"
-sys.path.append(os.path.join(basepath, r"algorithms\greedy"))
-sys.path.append(os.path.join(basepath, r"algorithms\state_space"))
+sys.path.append(os.path.join(basepath, "algorithms", "greedy"))
+sys.path.append(os.path.join(basepath, "algorithms", "state_space"))
 sys.path.append(os.path.join(basepath, "initialiser"))
 from welsh_powell import welsh_powell_variation
 import initialiser as init
