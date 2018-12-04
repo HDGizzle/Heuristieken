@@ -1,5 +1,6 @@
 Initialiser 
-===========
+============
+
 The initialiser file contains multiple functions to solve the problem of Radio Russia stated as follows:
 
 1. Creates a dictionary that contains the provinces and the sender assigned sendertype.
