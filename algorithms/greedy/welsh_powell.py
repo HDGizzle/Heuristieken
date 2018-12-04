@@ -6,11 +6,21 @@ http://mrsleblancsmath.pbworks.com/w/file/fetch/46119304/vertex%20coloring%20alg
 
 # import other classes
 import copy
+import os
+import sys
+basepath = os.path.abspath(os.path.curdir).split("Heuristieken")[0] + "Heuristieken"
+sys.path.append(os.path.join(basepath, "main"))
+import checker as check
 
 
 def welsh_powell(province_pools, provinces, senders):
+    """
+    places senders first in provinces with most connections working as a greedy
+    algoritm
+    """
 
-    provinces_copy = copy.deepcopy(provinces)
+    # clear senders
+    check.provinces_reset(provinces)
 
     # lists all numbers of connections from high to low
     connections = sorted(province_pools, reverse=True)
@@ -28,7 +38,7 @@ def welsh_powell(province_pools, provinces, senders):
             for province_name in province_pool:
 
                 # extracts province object
-                province = provinces_copy[province_name]
+                province = provinces[province_name]
 
                 # check for presence of sender in neighbor
                 present = False
@@ -37,8 +47,8 @@ def welsh_powell(province_pools, provinces, senders):
                 for neighbor in province.neighbors:
 
                     # check if sender neighbor corresponds to current sender
-                    if provinces_copy[neighbor].sender:
-                        if provinces_copy[neighbor].sender.type == sender:
+                    if provinces[neighbor].sender:
+                        if provinces[neighbor].sender.type == sender:
                             present = True
 
                 # place sender if sender is not in neighbors
@@ -48,11 +58,8 @@ def welsh_powell(province_pools, provinces, senders):
                     province.sender = senders[sender]
                     senders_needed = sender
 
-    total_costs(provinces_copy)
-    print(senders_needed)
 
-
-def welsh_powell_variation(province_pools, PROVINCES, SENDERS):
+def welsh_powell_variation(province_pools, provinces, senders):
     """
     uses a dictionary containing pools of provinces with the same amount of
     neighbors and sorts the contents of the pool by shifting each province one
@@ -61,6 +68,12 @@ def welsh_powell_variation(province_pools, PROVINCES, SENDERS):
     each province pool multiplied by the other numbers of provinces in the
     other pool
     """
+
+    # places senders in provinces and uses outcome as benchmark
+    check.place_senders(provinces, senders)
+    benchmark_variance = check.save_outcome(provinces)
+    benchmark_costs = benchmark_variance
+
     # create a dictionary to keep track of all different sortings of each pool
     pool_sorts = {}
 
@@ -124,14 +137,15 @@ def welsh_powell_variation(province_pools, PROVINCES, SENDERS):
                 list_cursor[i - 1] = 0
 
         # execute wellsh powel for the given variation
-        welsh_powell(variation_prov_pool, PROVINCES, SENDERS)
+        welsh_powell(variation_prov_pool, provinces, senders)
 
+        # save outcome and see if it generates lower costs or variance
+        outcome = check.save_outcome(provinces)
 
-def total_costs(provinces):
-    """
-    this function returns the total amount of costs given the senders placed
-    """
-    costs = 0
-    for province in provinces:
-        costs += provinces[province].sender.costs
-    print(costs)
+        if check.lower_costs(provinces, outcome, benchmark_costs):
+            benchmark_costs = outcome
+
+        if check.enhanced_distribution(outcome, benchmark_variance):
+            benchmark_variance = outcome
+
+    return benchmark_costs, benchmark_variance
