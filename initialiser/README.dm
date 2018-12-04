@@ -1,5 +1,4 @@
-Initialiser 
-============
+# Initialiser 
 
 The initialiser file contains multiple functions to solve the problem of Radio Russia stated as follows:
 
