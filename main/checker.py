@@ -48,17 +48,12 @@ def validity_check(provinces):
     return valid
 
 
-def cost_calculator(outcome, senders):
+def place_senders(provinces, senders):
     """
-    calculates the total costs based on cost of senders used
+    places senders in provinces
     """
-
-    costs = 0
-    for province in outcome:
-        sender_used = outcome[province]
-        costs += senders[sender_used].costs
-
-    return costs
+    for province in provinces:
+        provinces[province].sender_placer(provinces, senders)
 
 
 def senders_placed(outcome):
@@ -126,3 +121,41 @@ def enhanced_distribution(outcome, benchmark_outcome):
             better_outcome = True
 
     return better_outcome
+
+
+def lower_cost(provinces, outcome, benchmark):
+    """
+    this function tests whether a given outcome can give lower costs under
+    4 cost schemes compared to its benchmark
+    """
+    if total_costs(provinces, outcome) < total_costs(provinces, outcome):
+        return True
+    else:
+        return False
+
+
+def total_costs(provinces, outcome):
+    """
+    calculates the lowest costs an outcome generate given all 4 cost schemes
+    and returns the lowest total costs it can find
+    """
+    costs = []
+    for i in range(4):
+        all_costs = 0
+        for province in outcome:
+            all_costs += provinces[province].sender.costs[i]
+        costs.append([total_costs])
+    return min(costs)
+
+
+def cost_scheme(provinces, outcome):
+    """
+    retrieves te respective cost scheme
+    """
+    lowest_cost = total_costs(provinces, outcome)
+    for i in range(4):
+        all_costs = 0
+        for province in outcome:
+            all_costs += provinces[province].sender.costs[i]
+        if all_costs == lowest_cost:
+            return i + 1
