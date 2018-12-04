@@ -25,7 +25,7 @@ def province_initialiser(INPUT_CSV):
     provinces = {}
 
     # opens csv file containing province data
-    with open(os.path.join(basepath, "initialiser", "data", INPUT_CSV)) as myfile:
+    with open(os.path.join(basepath, r"initialiser\data", INPUT_CSV)) as myfile:
 
         # checks which csv is imported
         if 'nederland.csv' in INPUT_CSV:
@@ -60,17 +60,25 @@ def sender_initialiser():
 
     # sender types range from A-G
     sender_types = [1, 2, 3, 4, 5, 6, 7]
-    sender_costs = [12,	26,	27,	30,	37,	39,	41]
 
-    type_1 = [12, 26, 27, 30, 37, 39, 41]
-    type_2 = [19, 20, 21, 23, 36, 37, 38]
-    type_3 = [16, 17, 31, 33, 36, 56, 57]
-    type_4 = [3, 34, 36, 39, 41, 43, 58]
+    # different cost schemes
+    scheme_1 = [12, 26, 27, 30, 37, 39, 41]
+    scheme_2 = [19, 20, 21, 23, 36, 37, 38]
+    scheme_3 = [16, 17, 31, 33, 36, 56, 57]
+    scheme_4 = [3, 34, 36, 39, 41, 43, 58]
 
-    sender_costs = [type_1, type_2, type_3, type_4]
-    # adds all different sender type objects to SENDERS
+    sender_costs = [scheme_1, scheme_2, scheme_3, scheme_4]
+
+    # adds all different sender type objects to senders dictionary
     for i in range(len(sender_types)):
-        senders[sender_types[i]] = Sender(sender_types[i], sender_costs[i])
+
+        # adds senders costs under different schemes to sender objects
+        costs = []
+        for j in sender_costs:
+            costs.append(sender_costs[j][i])
+
+        # create sender objects
+        senders[sender_types[i]] = Sender(sender_types[i], costs)
 
     # return dictionary containing sender objects
     return senders
@@ -104,13 +112,3 @@ def neighbor_sorted_provinces(provinces):
 
     # returns sorted pools dictionary
     return connections_sort
-
-
-def total_costs(provinces):
-    """
-    this function returns the total amount of costs given the senders placed
-    """
-    costs = 0
-    for province in provinces:
-        costs += provinces[province].sender.costs
-    print(costs)
