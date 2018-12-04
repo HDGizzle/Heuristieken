@@ -1,82 +1,104 @@
 import os
 import sys
 basepath = os.path.abspath(os.path.curdir).split("Heuristieken")[0] + "Heuristieken"
-sys.path.append(os.path.join(basepath, "initialiser"))
-sys.path.append(os.path.join(basepath, "initialiser", "data"))
-import initialiser
+sys.path.append(os.path.join(basepath, "main"))
+import checker as check
 import random
-import math
+from collections import defaultdict
 
 
-# define province dictionary and different senders
-provinces = initialiser.province_initialiser("usa_borders.csv")
-sendtypes = ["A", "B", "C", "D", "E", "F", "G"]
+def low_variance_picker(possible, usage):
+    """
+    sorts dictionary of senders based on the frequency of their respective
+    usage, which leads to a more even distribution of sender types by given
+    preference to the sender with the lowest frequency in placing it
+    """
+    for sendtype, used in sorted(usage.items(), key=lambda x: x[1]):
+        if sendtype in possible:
+            return sendtype
+    return possible[0]
 
-visited = [] # blijft intact
-stack = ["Wyoming"] # wordt gepopt, staat een beginprovince in
-# print(len(provinces["Utrecht"].neighbors))
-used = []
 
-# print(provinces[stack[-1]].sender)
-# print(len(provinces))
+def depth_first(provinces, senders, combinations):
+    """
+    depth first is used to try out a given amount of combinations and finds
+    outcomes with either the lowest variance or costs
+    """
 
-for province in provinces:
-    if len(provinces[province].neighbors) == 0:
-        provinces[province].sender = "A"
-        visited.append(province)
+    # places senders in provinces and uses outcome as benchmark
+    check.place_senders(provinces, senders)
+    benchmark = check.save_outcome(provinces)
 
-while len(visited) != len(provinces):  # zolang er unvisited provinces zijn
-    temp = ["A", "B", "C", "D", "E", "F", "G"]
+    # try n combinations
+    for i in range(combinations):
 
-    if provinces[stack[-1]].sender == None:       # mocht je geen stap terug hebben genomen wil je deze loop in gaan
+        """
+        define a controlled random in order to roam statespace and make search
+        replicable
+        """
+        random.seed(i)
 
-        visited.append(stack[-1])           # je gaat een zender toevoegen dus append je hem alvast aan visited
+        # define visited as empty set
+        visited = set()
 
-        for neighbor in provinces[stack[-1]].neighbors:
+        # clear senders from provinces
+        check.province_reset(provinces)
 
-         # tijdelijk om een lijst met ongebruikte zendtypes over te houden
-            if provinces[neighbor].sender in temp:
-                # print(sendtype)
-                temp.remove(provinces[neighbor].sender)
-            provinces[stack[-1]].sender = temp[0]  # gebruik eerste zender uit de lijst met ongebruikte zendtypes om minimaal aantal verschillende zenders te gebruiken
-            if temp[0] not in used:
-                used.append(temp[0])
+        # pick first province to start with
+        stack = [list(provinces.keys())[0]]
 
-        count = 0
-        for neighbor in provinces[stack[-1]].neighbors:
-            if neighbor in visited:
-                count = count + 1
+        # this dictionary keeps track of sender usage
+        usage = defaultdict(int)
 
-        if count == len(provinces[stack[-1]].neighbors):
-            stack.pop()
-                         # als alle buren in visited zijn zit je klem en moet je stapje terug, begin weer bovenaan while loop
-        else:
-            list = []                     # selectie met buren die nog niet visited zijn
-            for neighbor in provinces[stack[-1]].neighbors:
+        # assign sendertype to provinces without neighbors
+        for province in provinces:
+            if not provinces[province].neighbors:
+                provinces[province].sender_placer(provinces, senders)
+                usage[provinces[province].sender.type] += 1
+                visited.add(province)
+
+        # as long as stack contains provinces
+        while stack:
+            province = stack.pop()
+
+            # start on top of loop if province has already been visited
+            if province in visited:
+                continue
+
+            # append current province to visited
+            visited.add(province)
+
+            # define unvisited neighbors list
+            neighbors = []
+            for neighbor in provinces[province].neighbors:
                 if neighbor not in visited:
-                    list.append(neighbor)
+                    neighbors.append(neighbor)
 
-            stack.append(random.choice(list)) # begint bovenaan while loop en dit wordt de nieuwe stack[-1]
+            # add all unvisited neighbors to stack and shuffle order
+            random.shuffle(neighbors)
+            stack.extend(neighbors)
 
+            # define sendtypes
+            sender_types = list(senders.keys())
 
-    else:                           # als je wel een stap terug hebt genomen doe je dit
-        count = 0
-        for neighbor in provinces[stack[-1]].neighbors:
-            if neighbor in visited:
-                count = count + 1
+            # remove senders already used with neighbors
+            for neighbor in provinces[province].neighbors:
+                if provinces[neighbor].sender:
+                    if provinces[neighbor].sender.type in sender_types:
+                        sender_types.remove(provinces[neighbor].sender.type)
 
-        if count == len(provinces[stack[-1]].neighbors):
-            stack.pop()
-                         # als alle buren in visited zijn zit je klem en moet je stapje terug, begin weer bovenaan while loop
-        else:
-            list = []                     # selectie met buren die nog niet visited zijn
-            for neighbor in provinces[stack[-1]].neighbors:
-                if neighbor not in visited:
-                    list.append(neighbor)
+            # assign available sender type based on usage
+            sender = low_variance_picker(sender_types, usage)
+            provinces[province].sender = senders[sender]
+            usage[sender] += 1
 
-            stack.append(random.choice(list)) # begint bovenaan while loop en dit wordt de nieuwe stack[-1]
+        # keep track of outcome
+        outcome = check.save_outcome(provinces)
 
-for province in provinces:
+        # check if outcome is more efficient than benchmark
+        if check.enhanced_distribution(outcome, benchmark):
+            benchmark = outcome
+            seed = i
 
-    print(provinces[province].sender, province)
-print(used)
+    print(benchmark)
+    print(seed)
