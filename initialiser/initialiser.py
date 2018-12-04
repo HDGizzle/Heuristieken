@@ -8,7 +8,7 @@ connections
 import os
 import sys
 basepath = os.path.abspath(os.path.curdir).split("Heuristieken")[0] + "Heuristieken"
-sys.path.append(os.path.join(basepath, r"main\objects"))
+sys.path.append(os.path.join(basepath, "main", "objects"))
 sys.path.append(os.path.join(os.path.abspath(os.path.curdir), "data"))
 import pandas
 from province_class import Province
@@ -62,6 +62,12 @@ def sender_initialiser():
     sender_types = [1, 2, 3, 4, 5, 6, 7]
     sender_costs = [12,	26,	27,	30,	37,	39,	41]
 
+    type_1 = [12, 26, 27, 30, 37, 39, 41]
+    type_2 = [19, 20, 21, 23, 36, 37, 38]
+    type_3 = [16, 17, 31, 33, 36, 56, 57]
+    type_4 = [3, 34, 36, 39, 41, 43, 58]
+
+    sender_costs = [type_1, type_2, type_3, type_4]
     # adds all different sender type objects to SENDERS
     for i in range(len(sender_types)):
         senders[sender_types[i]] = Sender(sender_types[i], sender_costs[i])
