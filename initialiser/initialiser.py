@@ -25,7 +25,7 @@ def province_initialiser(INPUT_CSV):
     provinces = {}
 
     # opens csv file containing province data
-    with open(os.path.join(basepath, r"initialiser\data", INPUT_CSV)) as myfile:
+    with open(os.path.join(basepath, "initialiser", "data", INPUT_CSV)) as myfile:
 
         # checks which csv is imported
         if 'nederland.csv' in INPUT_CSV:
