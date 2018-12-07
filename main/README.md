@@ -5,4 +5,4 @@ The checker file provides functions to see if the senders are placed correctly a
 calculates the total amount of money used for the solution and tracks the senders that are being used.
 
 The sender placer script places senders in different provinces under the constraint that
-bordering provinces cannot have the same sender type
+bordering provinces cannot have the same sender type. With the sender placer file, different algortihms could be used to solve the problem of Radio Russia.
