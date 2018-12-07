@@ -18,16 +18,19 @@ import checker as check
 
 def hill_climber(provinces, senders):
     """
-    this function first randomly fills a chart and then starts improving
+    this function first places a sender in every chart and then makes alterations
+    in the hope of improvement
     """
 
     check.place_sender(provinces, senders)
 
     outcome = check.save_outcome(provinces)
-    print(check.sender_variance(outcome))
 
+    # amount of changes maximally to be made is set at limit
     change = 0
     limit = 900
+
+    # outcome is the state
     outcome = alteration(provinces, senders, outcome, change, limit)
 
 
@@ -50,29 +53,34 @@ def alteration(provinces, senders, outcome, changes, limit):
                     if sender_type == provinces[neighbor].sender.type:
                         new_sender = False
 
-                # places random new senders
+                # places random new senders and alteration is made
                 if new_sender:
                     alteration_made = True
-                    # print(sender_type)
+
+                    # remove province from list to alterate
                     provinces[province].sender = senders[sender_type]
                     provinces_list.remove(province)
 
+        # if no alteration is made the highest sender types are removed
         if not alteration_made:
             highest_sender = check.types_used(provinces)[0]
 
+            # these are replaced by the lowest sender type
             for province in provinces:
                 if provinces[province].sender.type == highest_sender:
                     provinces[province].sender.type == senders[1]
 
+            changes += 1
+        # checks if outcome is valid, if so compare against benchmark
         if check.validity_check(provinces):
 
             new_outcome = check.save_outcome(provinces)
-            # print(check.sender_variance(new_outcome))
+
             if check.enhanced_distribution(new_outcome, outcome):
                 outcome = new_outcome
             changes += 1
         return alteration(provinces, senders, outcome, changes, limit)
 
+    # algoritm is done and best outcome can be returned
     else:
-        print(check.sender_variance(outcome))
         return outcome
