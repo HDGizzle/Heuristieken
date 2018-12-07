@@ -74,7 +74,7 @@ def sender_initialiser():
 
         # adds senders costs under different schemes to sender objects
         costs = []
-        for j in sender_costs:
+        for j in range(len(sender_costs)):
             costs.append(sender_costs[j][i])
 
         # create sender objects
