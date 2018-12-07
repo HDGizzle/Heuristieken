@@ -70,6 +70,38 @@ def clusters(provinces, senders, province_pools):
     return clusters_final
 
 
+def mean_connections(provinces):
+    """
+    this function tries to determine the objective function for senders by
+    calculating the average amount of connections for all provinces.
+    The maximum rounded (above) amount connections determines how many senders
+    are necessary
+    """
+    mean = 0
+    for province in provinces:
+        mean += len(provinces[province].neighbors)
+    mean = mean / len(provinces)
+    return mean
+
+
+def cost_objective(provinces, senders):
+    """
+    this function calculates the objective function for total costs by relaxing
+    the constraints on neighboring senders. The upperbound is calculate as the
+    cost of the most expensive sender multiplied by the amount of provinces and
+    the lower bound assumes the least expensive sender can be placed in every
+    province
+    """
+
+    # most expensive sender is sender G under cost scheme 4
+    upper_bound = len(provinces) * senders[7].cost[4]
+
+    # least expensive province is sender 1 under cost scheme 4
+    lower_bound = len(provinces) * senders[1].cost[4]
+
+    return upper_bound, lower_bound
+
+
 def state_space(provinces, senders):
     """
     this function calculates the total state space, which is the amount of
