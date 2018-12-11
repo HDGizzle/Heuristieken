@@ -4,7 +4,7 @@ calculates the total amount of money used for the solution
 """
 
 
-def province_reset(provinces):
+def provinces_reset(provinces):
     """
     takes all senders in the provinces away
     """
@@ -17,7 +17,6 @@ def save_outcome(provinces):
     """
     saves the outcome with the provinces and senders placed
     """
-
     outcome = {}
     for province in provinces:
         outcome[province] = provinces[province].sender.type
@@ -76,7 +75,7 @@ def types_used(outcome):
     for province in outcome:
         if not outcome[province] in sendertypes_used:
             sendertypes_used.append(outcome[province])
-    return sendertypes_used
+    return sorted(sendertypes_used)
 
 
 def sender_variance(new_outcome):
@@ -90,7 +89,7 @@ def sender_variance(new_outcome):
     types = types_used(new_outcome)
     mean_freq = len(placed_senders) / len(types)
 
-    # calculates the total variance of occurrences in senders
+    # calculates the  variance of occurrences in senders
     for sender in types:
         freq_sender = placed_senders.count(sender)
         variance += (freq_sender - mean_freq) * (freq_sender - mean_freq)
@@ -123,18 +122,7 @@ def enhanced_distribution(outcome, benchmark_outcome):
     return better_outcome
 
 
-def lower_cost(provinces, outcome, benchmark):
-    """
-    this function tests whether a given outcome can give lower costs under
-    4 cost schemes compared to its benchmark
-    """
-    if total_costs(provinces, outcome) < total_costs(provinces, outcome):
-        return True
-    else:
-        return False
-
-
-def total_costs(provinces, outcome):
+def total_costs(senders, outcome):
     """
     calculates the lowest costs an outcome generate given all 4 cost schemes
     and returns the lowest total costs it can find
@@ -143,19 +131,81 @@ def total_costs(provinces, outcome):
     for i in range(4):
         all_costs = 0
         for province in outcome:
-            all_costs += provinces[province].sender.costs[i]
-        costs.append([total_costs])
+            all_costs += senders[outcome[province]].costs[i]
+        costs.append(all_costs)
     return min(costs)
+
+
+def advanced_costs(senders, outcome):
+    """
+    this function retrieves the lowest costs under the advanced cost scheme
+    """
+    # keep track of costs and retrieve types used and senders placed
+    costs = []
+    placed = senders_placed(outcome)
+    types = types_used(outcome)
+
+    # iterate over four costs schemes
+    for i in range(4):
+
+        # costs start at 0
+        all_costs = 0
+
+        # iterate over specific sender types used
+        for type in types:
+
+            # calculate the amount of the sender type used
+            amount = placed.count(type)
+
+            # price index starts at 100% of initital price
+            index = 1
+
+            # iterate over the amount of senders used
+            for j in range(amount):
+
+                # after the first sender every next sender becomes 10% cheaper
+                if j > 0:
+                    index = index * 0.9
+                all_costs += index * senders[type].costs[i]
+
+        # add total costs to list
+        costs.append(all_costs)
+
+    # returns minimum of costs
+    return min(costs)
+
+
+def lower_costs(senders, outcome, benchmark):
+    """
+    this function tests whether a given outcome can give lower costs under
+    any of the 4 cost schemes compared to its benchmark
+    """
+    if total_costs(senders, outcome) < total_costs(senders, benchmark):
+        return True
+    else:
+        return False
+
+
+def lower_adv_costs(senders, outcome, benchmark):
+    """
+    this function tests whether a given outcome can give lower advanced
+    costs under any of the 4 cost schemes compared to its benchmark
+    """
+    if advanced_costs(senders, outcome) < advanced_costs(senders, benchmark):
+        return True
+    else:
+        return False
 
 
 def cost_scheme(provinces, outcome):
     """
-    retrieves te respective cost scheme
+    retrieves the respective cost scheme
     """
     lowest_cost = total_costs(provinces, outcome)
     for i in range(4):
         all_costs = 0
         for province in outcome:
             all_costs += provinces[province].sender.costs[i]
+        # if costs tested matches cost scheme return cost scheme
         if all_costs == lowest_cost:
             return i + 1
