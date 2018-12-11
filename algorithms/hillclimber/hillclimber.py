@@ -90,5 +90,5 @@ def alteration(provinces, senders, benchmark, limit):
         # iteration has been made
         i += 1
 
-    # algoritm has made max alterations and returns best outcome
+    # algorithm has made max alterations and returns best outcome
     return benchmark
