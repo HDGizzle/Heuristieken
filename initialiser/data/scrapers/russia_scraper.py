@@ -73,8 +73,10 @@ def extract_provinces(dom):
             province = Province(provinces[i].text.rstrip(), russian_neighbors[i])
             all_oblasts[provinces[i].text.rstrip()] = province
 
+    # Moscow vs Moscow Oblast is redundant
     del all_oblasts['Moscow']
 
+    # deletes oblasts from neighbors not featured in provinces
     for oblast in all_oblasts:
         for neighbor in all_oblasts[oblast].neighbors:
             if neighbor not in all_oblasts:
