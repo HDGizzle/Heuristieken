@@ -6,6 +6,10 @@ this script scrapes data on Russia oblasts and borders
 """
 
 # imports libraries
+import os
+import sys
+basepath = os.path.abspath(os.path.curdir).split("Heuristieken")[0] + "Heuristieken"
+sys.path.append(os.path.join(basepath, "main", "objects"))
 import csv
 from province_class import Province
 from requests import get
@@ -52,9 +56,7 @@ def extract_provinces(dom):
 
                 # adds names to list in Russian neighbors
                 for name in names:
-
-                    # adds only oblasts to neighbors
-                    if "Oblast" in name.string:
+                    if not name == 'Khabarovsk Krai':
                         russian_neighbors[-1].append(name.string)
 
             # Kaliningrad has no Russian borders and is an enclave
@@ -68,9 +70,15 @@ def extract_provinces(dom):
         for i in range(new_provinces):
 
             # adds only oblasts to dictionary
-            if "Oblast" in (provinces[i].text):
-                province = Province(provinces[i].text, russian_neighbors[i])
-                all_oblasts[provinces[i].text] = province
+            province = Province(provinces[i].text.rstrip(), russian_neighbors[i])
+            all_oblasts[provinces[i].text.rstrip()] = province
+
+    del all_oblasts['Moscow']
+
+    for oblast in all_oblasts:
+        for neighbor in all_oblasts[oblast].neighbors:
+            if neighbor not in all_oblasts:
+                all_oblasts[oblast].neighbors.remove(neighbor)
 
     # returns list of oblasts
     return all_oblasts
