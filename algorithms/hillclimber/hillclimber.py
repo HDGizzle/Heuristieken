@@ -16,8 +16,8 @@ sys.path.append(os.path.join(basepath, "main"))
 # additional functions to import
 import checker as check
 
-# maximum amount of that provinces may be checked for alteration
-LIMIT = 10000
+# maximum amount that map can be changed
+LIMIT = 100000
 
 
 def hill_climber(provinces, senders):
@@ -29,11 +29,11 @@ def hill_climber(provinces, senders):
     # place senders and show results for initial outcome
     check.place_senders(provinces, senders)
     outcome = check.save_outcome(provinces)
-    print(check.advanced_costs(senders, outcome))
+    print(check.sender_variance(outcome))
 
     # print best outcome after given alterations have been made
     outcome = alteration(provinces, senders, outcome, LIMIT)
-    print(check.advanced_costs(senders, outcome))
+    print(check.sender_variance(outcome))
 
 
 def alteration(provinces, senders, benchmark, limit):
@@ -42,7 +42,7 @@ def alteration(provinces, senders, benchmark, limit):
     alterations
     """
     #  save sender types to use
-    types = check.types_used(benchmark)
+    types = check.types_used(benchmark)[3:]
 
     # start value for i, in first run initialised at 0
     i = LIMIT - limit
@@ -78,6 +78,9 @@ def alteration(provinces, senders, benchmark, limit):
 
                     #  save new outcome and compare against benchmark
                     new_outcome = check.save_outcome(provinces)
+                    if len(check.types_used(new_outcome)) == 3:
+                        print('WAHEET')
+
                     if check.lower_adv_costs(senders, new_outcome, benchmark):
                         benchmark = check.save_outcome(provinces)
 
