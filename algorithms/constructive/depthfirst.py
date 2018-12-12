@@ -29,6 +29,10 @@ def depth_first(provinces, senders, combinations):
     check.place_senders(provinces, senders)
     benchmark = check.save_outcome(provinces)
 
+    # collect data for frequency histograms
+    stdev_tracker = []
+    cost_tracker = []
+
     # try n combinations
     for i in range(combinations):
 
@@ -94,6 +98,11 @@ def depth_first(provinces, senders, combinations):
 
         # keep track of outcome
         outcome = check.save_outcome(provinces)
+
+        # collect data for frequency histograms
+        stdev_tracker.append(sender_variance(outcome) / sender_variance(outcome))
+        cost_tracker.append(advanced_costs(senders, outcome))
+
 
         # check if outcome is more efficient than benchmark
         if check.enhanced_distribution(outcome, benchmark):

@@ -1,5 +1,5 @@
 """
-this function uses the Welsh Powell algoritm to find a solution for the
+this function uses the Welsh Powell algorithm to find a solution for the
 placing of senders in provinces under color graphing constraints
 http://mrsleblancsmath.pbworks.com/w/file/fetch/46119304/vertex%20coloring%20algorithm.pdf
 """
@@ -15,7 +15,7 @@ import checker as check
 def welsh_powell(province_pools, provinces, senders):
     """
     places senders first in provinces with most connections working as a greedy
-    algoritm
+    algorithm
     """
 
     # clear senders
@@ -59,7 +59,7 @@ def welsh_powell_variation(province_pools, provinces, senders):
     """
     uses a dictionary containing pools of provinces with the same amount of
     neighbors and sorts the contents of the pool by shifting each province one
-    place in the list to use varying orders for the wellsh powel algoritm.
+    place in the list to use varying orders for the wellsh powell algorithm.
     the total amount of variations created equals the number of provinces in
     each province pool multiplied by the other numbers of provinces in the
     other pool
