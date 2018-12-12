@@ -5,7 +5,6 @@ http://mrsleblancsmath.pbworks.com/w/file/fetch/46119304/vertex%20coloring%20alg
 """
 
 # import other classes
-import copy
 import os
 import sys
 basepath = os.path.abspath(os.path.curdir).split("Heuristieken")[0] + "Heuristieken"
@@ -24,8 +23,6 @@ def welsh_powell(province_pools, provinces, senders):
 
     # lists all numbers of connections from high to low
     connections = sorted(province_pools, reverse=True)
-
-    senders_needed = 0
 
     # iterates over senders
     for sender in senders:
@@ -56,7 +53,6 @@ def welsh_powell(province_pools, provinces, senders):
 
                     # place sender
                     province.sender = senders[sender]
-                    senders_needed = sender
 
 
 def welsh_powell_variation(province_pools, provinces, senders):
@@ -142,7 +138,7 @@ def welsh_powell_variation(province_pools, provinces, senders):
         # save outcome and see if it generates lower costs or variance
         outcome = check.save_outcome(provinces)
 
-        if check.lower_costs(provinces, outcome, benchmark_costs):
+        if check.lower_costs(senders, outcome, benchmark_costs):
             benchmark_costs = outcome
 
         if check.enhanced_distribution(outcome, benchmark_variance):
