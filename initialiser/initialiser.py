@@ -25,19 +25,19 @@ def province_initialiser(INPUT_CSV):
     provinces = {}
 
     # opens csv file containing province data
-    with open(os.path.join(basepath, "initialiser", "data", INPUT_CSV)) as myfile:
-
-        # checks which csv is imported
-        if 'nederland.csv' in INPUT_CSV:
-            datafile = pandas.read_csv(myfile, delimiter=';')
+    with open(os.path.join(basepath, "initialiser", "data", INPUT_CSV)) as mf:
+        print(INPUT_CSV)
+        # checks which csv is imported to determine delimiter
+        if INPUT_CSV in 'russia_borders.csv' or INPUT_CSV in 'usa_borders.csv':
+            datafile = pandas.read_csv(mf, delimiter=',')
         else:
-            datafile = pandas.read_csv(myfile)
+            datafile = pandas.read_csv(mf, delimiter=';')
 
         # iterates over rows in csv file
         for i in range(len(datafile)):
 
             # extracts province name and neighbors as a list
-            name = datafile["name"][i].strip()
+            name = datafile["name"][i]
             neighbors = str(datafile["neighbors"][i]).split(", ")
 
             # replaces pandas designation 'nan' for empty with empty list
