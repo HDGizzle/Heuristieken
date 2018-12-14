@@ -1,7 +1,10 @@
 import os
 import sys
+import math
 basepath = os.path.abspath(os.path.curdir).split("Heuristieken")[0] + "Heuristieken"
 sys.path.append(os.path.join(basepath, "main"))
+sys.path.append(os.path.join(basepath, "visualiser"))
+import outcome_plotter
 import checker as check
 import random
 from collections import defaultdict
@@ -30,6 +33,7 @@ def depth_first(provinces, senders, combinations):
     benchmark = check.save_outcome(provinces)
 
     # collect data for frequency histograms
+    variances = []
     costs = []
 
     # try n combinations
@@ -99,7 +103,8 @@ def depth_first(provinces, senders, combinations):
             # keep track of outcome
         outcome = check.save_outcome(provinces)
 
-        costs.append(sender_variance(outcome))
+        costs.append(check.total_costs(senders, outcome))
+        variances.append(math.sqrt(check.sender_variance(outcome)))
 
 
         # check if outcome is more efficient than benchmark
@@ -111,3 +116,6 @@ def depth_first(provinces, senders, combinations):
     print(benchmark)
     print("Best Variance Seed:", seed)
     print("Best Variance Frequencies:", bestusage)
+    print(costs)
+    outcome_plotter.plotter(variances, "standard deviation", "stdevplot.png", combinations)
+    # outcome_plotter.plotter(costs, "costs", "costplot.png")
