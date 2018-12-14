@@ -30,8 +30,7 @@ def depth_first(provinces, senders, combinations):
     benchmark = check.save_outcome(provinces)
 
     # collect data for frequency histograms
-    stdev_tracker = []
-    cost_tracker = []
+    costs = []
 
     # try n combinations
     for i in range(combinations):
@@ -46,7 +45,7 @@ def depth_first(provinces, senders, combinations):
         visited = set()
 
         # clear senders from provinces
-        check.province_reset(provinces)
+        check.provinces_reset(provinces)
 
         # pick first province to start with
         stack = [list(provinces.keys())[0]]
@@ -96,18 +95,19 @@ def depth_first(provinces, senders, combinations):
             provinces[province].sender = senders[sender]
             usage[sender] += 1
 
-        # keep track of outcome
+
+            # keep track of outcome
         outcome = check.save_outcome(provinces)
 
-        # collect data for frequency histograms
-        stdev_tracker.append(sender_variance(outcome) / sender_variance(outcome))
-        cost_tracker.append(advanced_costs(senders, outcome))
+        costs.append(sender_variance(outcome))
 
 
         # check if outcome is more efficient than benchmark
         if check.enhanced_distribution(outcome, benchmark):
             benchmark = outcome
             seed = i
+            bestusage = usage
 
     print(benchmark)
-    print(seed)
+    print("Best Variance Seed:", seed)
+    print("Best Variance Frequencies:", bestusage)
