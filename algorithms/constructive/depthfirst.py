@@ -117,5 +117,5 @@ def depth_first(provinces, senders, combinations):
     print("Best Variance Seed:", seed)
     print("Best Variance Frequencies:", bestusage)
     print(costs)
-    outcome_plotter.plotter(variances, "standard deviation", "stdevplot.png", combinations)
+    outcome_plotter.plotter(variances, "Standard deviation", "stdevplotdepthfirst.png", combinations)
     # outcome_plotter.plotter(costs, "costs", "costplot.png")

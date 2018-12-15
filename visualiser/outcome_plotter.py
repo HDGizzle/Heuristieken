@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import matplotlib.pylab as pylab
 import numpy as np
 
+# in order: (variances or costs, x axis text, save as filename, combinations)
 def plotter(data_list, xlabel, png_name, combinations):
     """
     this function plots bars based on observations and frequency

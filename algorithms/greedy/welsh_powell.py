@@ -9,8 +9,10 @@ import os
 import sys
 basepath = os.path.abspath(os.path.curdir).split("Heuristieken")[0] + "Heuristieken"
 sys.path.append(os.path.join(basepath, "main"))
+sys.path.append(os.path.join(basepath, "visualiser"))
+import outcome_plotter
 import checker as check
-
+import math
 
 def welsh_powell(province_pools, provinces, senders):
     """
@@ -108,8 +110,18 @@ def welsh_powell_variation(province_pools, provinces, senders):
     # keeps track of all variations
     variation = 0
 
+    # keep track of variations and costs for plotting
+    costs = []
+    variances = []
+
+    # keep track of iterations for plotting
+    combinations = 0
+
     # makes all possible combines of available sorts in pools
     while list_counter[-1] >= list_cursor[-1]:
+
+        # combinations counter
+        combinations += 1
 
         # creates a variation of province pools
         variation_prov_pool = {}
@@ -138,10 +150,16 @@ def welsh_powell_variation(province_pools, provinces, senders):
         # save outcome and see if it generates lower costs or variance
         outcome = check.save_outcome(provinces)
 
+        # add costs and variances to list for plotting
+        costs.append(check.total_costs(senders, outcome))
+        variances.append(math.sqrt(check.sender_variance(outcome)))
+
         if check.lower_costs(senders, outcome, benchmark_costs):
             benchmark_costs = outcome
 
         if check.enhanced_distribution(outcome, benchmark_variance):
             benchmark_variance = outcome
 
+    # plot histogram
+    outcome_plotter.plotter(costs, "Costs", "costsplotWelsh.png", combinations)
     return benchmark_costs, benchmark_variance
