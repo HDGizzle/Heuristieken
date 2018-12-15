@@ -103,7 +103,7 @@ def depth_first(provinces, senders, combinations):
             # keep track of outcome
         outcome = check.save_outcome(provinces)
 
-        costs.append(check.total_costs(senders, outcome))
+        costs.append(check.advanced_costs(senders, outcome))
         variances.append(math.sqrt(check.sender_variance(outcome)))
 
 
@@ -116,6 +116,5 @@ def depth_first(provinces, senders, combinations):
     print(benchmark)
     print("Best Variance Seed:", seed)
     print("Best Variance Frequencies:", bestusage)
-    print(costs)
-    outcome_plotter.plotter(variances, "Standard deviation", "stdevplotdepthfirst.png", combinations)
+    outcome_plotter.plotter(costs, "Costs", "advancedcostsdepthfirst", combinations)
     # outcome_plotter.plotter(costs, "costs", "costplot.png")

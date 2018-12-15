@@ -151,15 +151,15 @@ def welsh_powell_variation(province_pools, provinces, senders):
         outcome = check.save_outcome(provinces)
 
         # add costs and variances to list for plotting
-        costs.append(check.total_costs(senders, outcome))
-        variances.append(math.sqrt(check.sender_variance(outcome)))
+        costs.append(check.advanced_costs(senders, outcome))
+        # variances.append(math.sqrt(check.sender_variance(outcome)))
 
-        if check.lower_costs(senders, outcome, benchmark_costs):
+        if check.lower_adv_costs(senders, outcome, benchmark_costs):
             benchmark_costs = outcome
 
         if check.enhanced_distribution(outcome, benchmark_variance):
             benchmark_variance = outcome
 
     # plot histogram
-    outcome_plotter.plotter(costs, "Costs", "costsplotWelsh.png", combinations)
+    outcome_plotter.plotter(costs, "Costs", "costplotWelsh.png", combinations)
     return benchmark_costs, benchmark_variance

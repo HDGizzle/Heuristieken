@@ -39,7 +39,7 @@ if __name__ == "__main__":
     # uses the wellsh powel function to test different variations of pool sorts
 
     # welsh_powell_variation(province_pools, PROVINCES, SENDERS)
-    depth_first(PROVINCES, SENDERS, 500000)
+    depth_first(PROVINCES, SENDERS, 2000000)
 
 
 
