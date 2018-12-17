@@ -55,7 +55,6 @@ def depth_first(provinces, senders, combinations, title):
     benchmark = check.save_outcome(provinces)
 
     # collect data for frequency histograms
-    variances = []
     costs = []
 
     # try n combinations
