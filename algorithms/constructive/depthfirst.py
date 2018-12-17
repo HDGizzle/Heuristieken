@@ -19,7 +19,10 @@ def low_variance_picker(possible, usage):
     for sendtype, used in sorted(usage.items(), key=lambda x: x[1]):
         if sendtype in possible:
             return sendtype
-    return possible[0]
+    if possible:
+        return possible[0]
+    else:
+        return None
 
 
 def depth_first(provinces, senders, combinations):
@@ -96,6 +99,8 @@ def depth_first(provinces, senders, combinations):
 
             # assign available sender type based on usage
             sender = low_variance_picker(sender_types, usage)
+            if not sender:
+                continue
             provinces[province].sender = senders[sender]
             usage[sender] += 1
 
@@ -104,7 +109,7 @@ def depth_first(provinces, senders, combinations):
         outcome = check.save_outcome(provinces)
 
         costs.append(check.advanced_costs(senders, outcome))
-        variances.append(math.sqrt(check.sender_variance(outcome)))
+        # variances.append(math.sqrt(check.sender_variance(outcome)))
 
 
         # check if outcome is more efficient than benchmark
@@ -114,7 +119,8 @@ def depth_first(provinces, senders, combinations):
             bestusage = usage
 
     print(benchmark)
+    print(bestusage)
     print("Best Variance Seed:", seed)
     print("Best Variance Frequencies:", bestusage)
-    outcome_plotter.plotter(costs, "Costs", "advancedcostsdepthfirst", combinations)
+    outcome_plotter.plotter(costs, "Costs", "results/costsadvUkraine.png", combinations)
     # outcome_plotter.plotter(costs, "costs", "costplot.png")

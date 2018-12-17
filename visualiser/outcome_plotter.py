@@ -61,6 +61,7 @@ def plotter(data_list, xlabel, png_name, combinations):
     plt.xlabel(xlabel)
     plt.ylabel("Frequency")
     plt.title("Number of iterations: " + str(combinations))
-    plt.show()
     plt.savefig(png_name)
+    plt.show()
+
     print(max)
