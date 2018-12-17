@@ -1,13 +1,13 @@
 Objects
 ========
 
-The province class generates a class for each province which includes:
+De attributen van een provincie object zijn als volgt
 
-- province name
-- a list of neighbors names
-- a sender object
-- sender options (for state space calculation)
+- provincie name
+- lijst van provincieburen
+- een zenderobject
+- functie om zenders mee te plaatsen
 
-The sender placer generates for each province elements which includes:
-- sender type (ranging from A to G)
-- sender costs
+De attributen van een zender object bestaan uit het volgende:
+- zendertype (1 t/m 7, gelijk aan A t/m G)
+- zenderkosten onder de verschillende kostenschema's
