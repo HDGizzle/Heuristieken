@@ -14,36 +14,6 @@ import outcome_plotter
 import checker as check
 import math
 
-def welsh_powell(province_pools, provinces, senders):
-    """
-    places senders first in provinces with most connections working as a greedy
-    algorithm
-    """
-
-    # clear senders
-    check.provinces_reset(provinces)
-
-    # lists all numbers of connections from high to low
-    connections = sorted(province_pools, reverse=True)
-
-    # iterates over senders
-    for sender in senders:
-"""
-this function uses the Welsh Powell algorithm to find a solution for the
-placing of senders in provinces under color graphing constraints
-http://mrsleblancsmath.pbworks.com/w/file/fetch/46119304/vertex%20coloring%20algorithm.pdf
-"""
-
-# import other classes
-import os
-import sys
-basepath = os.path.abspath(os.path.curdir).split("Heuristieken")[0] + "Heuristieken"
-sys.path.append(os.path.join(basepath, "main"))
-sys.path.append(os.path.join(basepath, "visualiser"))
-import outcome_plotter
-import checker as check
-import math
-
 
 def welsh_powell_variation(province_pools, provinces, senders, title):
     """
@@ -194,4 +164,3 @@ def welsh_powell(province_pools, provinces, senders):
 
                     # place sender
                     province.sender = senders[sender]
-
