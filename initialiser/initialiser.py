@@ -26,9 +26,9 @@ def province_initialiser(INPUT_CSV):
 
     # opens csv file containing province data
     with open(os.path.join(basepath, "initialiser", "data", INPUT_CSV)) as mf:
-        print(INPUT_CSV)
         # checks which csv is imported to determine delimiter
-        if INPUT_CSV in 'russia_borders.csv' or INPUT_CSV in 'usa_borders.csv':
+        if INPUT_CSV in 'russia_borders.csv' or INPUT_CSV in 'usa_borders.csv'\
+                                or INPUT_CSV in 'china_borders.csv':
             datafile = pandas.read_csv(mf, delimiter=',')
         else:
             datafile = pandas.read_csv(mf, delimiter=';')
