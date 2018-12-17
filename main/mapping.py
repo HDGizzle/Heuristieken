@@ -44,7 +44,15 @@ if __name__ == "__main__":
 
     # uses the wellsh powel function to test different variations of pool sorts
     welsh_powell_variation(province_pools, PROVINCES, SENDERS)
-    # depth_first(PROVINCES, SENDERS, 10000)
+    
+    # uses depth first to test the different variations in sender placing
+    benchmark = depth_first(PROVINCES, SENDERS, 1000)
+
+    # this can be clicked to show the colored maps according to the created dictionary with states and sendertypes
+    # mapplotterUKRbenchmark)
+    # mapplotter(benchmark)
+    # mapplotterCHINA(benchmark)
+    # mapplotterRUSSIA(benchmark)
 
     def total_costs(provinces):
         costs = 0

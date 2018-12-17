@@ -21,6 +21,8 @@ De main map bevat een code dat alle data en algoritmes centraliseert, waardoor m
 ## visualiser
 Deze map bevat files om een uitkomst op een kaart mee te visualiseren en om alle de kwaliteit (gemeten in kosten of zenderfrequentie) van een algoritme (zoals depth first) mee te visualiseren in een bart chart.
 
+De bar charts met de verdelingen van uitkomsten zijn handmatig toegepast en de algoritmes zijn bijgesteld om te testen voor zo laag mogelijke kosten of variantie. In de readme's van de algoritmes staat aangegeven wat de gebruiker aan kan passen. 
+
 ## pijnpunten
 Pijnpunten opdracht:
 
