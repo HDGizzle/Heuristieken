@@ -12,11 +12,7 @@ sys.path.append(os.path.join(basepath, "algorithms", "constructive"))
 sys.path.append(os.path.join(basepath, "algorithms", "hillclimber"))
 sys.path.append(os.path.join(basepath, "algorithms", "state_space"))
 sys.path.append(os.path.join(basepath, "initialiser"))
-sys.path.append(os.path.join(basepath, "main", "shapefiles"))
-sys.path.append(os.path.join(basepath, "visualiser", "vis_usa"))
-sys.path.append(os.path.join(basepath, "visualiser", "vis_china"))
-sys.path.append(os.path.join(basepath, "visualiser", "vis_russia"))
-sys.path.append(os.path.join(basepath, "visualiser", "vis_ukr"))
+sys.path.append(os.path.join(basepath, "visualiser", "shapefiles"))
 import matplotlib
 if sys.platform == "darwin":
     matplotlib.use('TkAgg')

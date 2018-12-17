@@ -24,6 +24,10 @@ def save_outcome(provinces):
     return outcome
 
 
+def outcome_replication(provinces, senders, outcome):
+    for province in outcome:
+        provinces[province].sender = senders[outcome[province]]
+
 def validity_check(provinces):
     """
     checks if outcome is valid by checking senders on constraints

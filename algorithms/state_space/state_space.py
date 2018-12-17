@@ -94,10 +94,10 @@ def cost_objective(provinces, senders):
     """
 
     # most expensive sender is sender G under cost scheme 4
-    upper_bound = len(provinces) * senders[7].cost[4]
+    upper_bound = len(provinces) * senders[7].costs[-1]
 
     # least expensive province is sender 1 under cost scheme 4
-    lower_bound = len(provinces) * senders[1].cost[4]
+    lower_bound = len(provinces) * senders[1].costs[-1]
 
     return upper_bound, lower_bound
 

@@ -18,10 +18,10 @@ sys.path.append(os.path.join(basepath, "main"))
 import checker as check
 
 # maximum amount that map can be changed
-LIMIT = 20
+LIMIT = 100
 
 
-def hill_climber(outcome, provinces, senders):
+def hill_climber(provinces, senders, outcome):
     """
     this function is allowed to check the map N times as specified under LIMIT.
     If the alteration finds a better solution within limit, the function is
@@ -73,7 +73,7 @@ def alteration(provinces, senders, benchmark):
                     #  save new outcome and compare against benchmark
                     new_outcome = check.save_outcome(provinces)
 
-                    if check.lower_adv_costs(senders, new_outcome, benchmark):
+                    if check.lower_costs(senders, new_outcome, benchmark):
                         benchmark = check.save_outcome(provinces)
 
                         # hill climber should restart from new benchmark
