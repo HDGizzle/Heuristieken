@@ -25,6 +25,9 @@ def save_outcome(provinces):
 
 
 def outcome_replication(provinces, senders, outcome):
+    """
+    fills provinces based on reported benchmark_outcome
+    """
     for province in outcome:
         provinces[province].sender = senders[outcome[province]]
 
