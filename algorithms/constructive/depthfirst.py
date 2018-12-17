@@ -22,7 +22,9 @@ def low_variance_picker(possible, usage):
     if possible:
         return possible[0]
     else:
-        return None
+        # outcome will not be valid, but also not saved, because validity check
+        # is used
+        return 1
 
 
 def depth_first(provinces, senders, combinations):
