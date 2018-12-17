@@ -1,6 +1,7 @@
 """
-hill climber randomly generates a solution and starts optimizing for colors
-or cash used
+hill climber uses a solution and makes alterations until a better position is
+found. This then becomes the default position and alterations are again made
+untill no better solution can be found within specified time limit
 """
 
 # libraries to import
@@ -17,41 +18,34 @@ sys.path.append(os.path.join(basepath, "main"))
 import checker as check
 
 # maximum amount that map can be changed
-LIMIT = 100000
+LIMIT = 20
 
 
-def hill_climber(provinces, senders):
+def hill_climber(outcome, provinces, senders):
     """
-    this function first places a sender in chart and then makes alterations
-    in the hope of improvement
+    this function is allowed to check the map N times as specified under LIMIT.
+    If the alteration finds a better solution within limit, the function is
+    rerun. If no better solution is found, then the function returns the best
+    found outcome
     """
-
-    # place senders and show results for initial outcome
-    check.place_senders(provinces, senders)
-    outcome = check.save_outcome(provinces)
-    print(check.sender_variance(outcome))
-
     # print best outcome after given alterations have been made
-    outcome = alteration(provinces, senders, outcome, LIMIT)
-    print(check.sender_variance(outcome))
+    outcome = alteration(provinces, senders, outcome)
+    return outcome
 
 
-def alteration(provinces, senders, benchmark, limit):
+def alteration(provinces, senders, benchmark):
     """
     This function tries to improve the current outcome by implementing
     alterations
     """
     #  save sender types to use
-    types = check.types_used(benchmark)[3:]
+    types = check.types_used(benchmark)
 
     # start value for i, in first run initialised at 0
-    i = LIMIT - limit
+    i = 0
 
     # hillclimber can only make maximum amount of alterations
     while i < LIMIT:
-
-        # limit is used to seed random
-        random.seed(i)
 
         # list is used to put senders in provinces and is shuffled every time
         provinces_list = list(provinces.keys())
@@ -78,17 +72,12 @@ def alteration(provinces, senders, benchmark, limit):
 
                     #  save new outcome and compare against benchmark
                     new_outcome = check.save_outcome(provinces)
-                    if len(check.types_used(new_outcome)) == 3:
-                        print('WAHEET')
 
                     if check.lower_adv_costs(senders, new_outcome, benchmark):
                         benchmark = check.save_outcome(provinces)
 
-                        # runs left to make used for next i initialisation
-                        runs = LIMIT - i
-
                         # hill climber should restart from new benchmark
-                        return alteration(provinces, senders, benchmark, runs)
+                        return alteration(provinces, senders, benchmark)
 
         # iteration has been made
         i += 1
