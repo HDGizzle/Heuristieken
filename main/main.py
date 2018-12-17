@@ -20,10 +20,14 @@ import state_space as state
 import checker as check
 
 # define global variables
+"""
+user can use ukraine_borders.csv, russia_borders.csv, usa_borders.csv or
+china_borders.csv as CSV_INPUT
+"""
 INPUT_CSV = 'ukraine_borders.csv'
 PROVINCES = init.province_initialiser(INPUT_CSV)
 SENDERS = init.sender_initialiser()
-COMBINATIONS = 10000
+COMBINATIONS = 100000
 
 
 if __name__ == "__main__":
