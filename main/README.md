@@ -1,8 +1,21 @@
 Main
 =====
 
-The checker file provides functions to see if the senders are placed correctly and
-calculates the total amount of money used for the solution and tracks the senders that are being used.
+## checker.py
+Checker.py bevat algemene hulpfuncties voor het uitvoeren van andere algoritmes. De hulpfuncties kunnen als volgt worden geclassificeerd:
 
-The sender placer script places senders in different provinces under the constraint that
-bordering provinces cannot have the same sender type. With the sender placer file, different algortihms could be used to solve the problem of Radio Russia.
+1) Functies om uitkomsten mee op te slaan
+2) Functies om zenders te plaatsen of verwijderen
+3) Functies om varianties en kosten van uitkomsten uit te rekenen
+4) Functies om uitkomsten met elkaar te vergelijken gebaseerd op kosten op zenderfrequentie
+
+## main.py
+Main.py wordt gebruikt om alle functies aan te roepen voor de vier verschillende landen. In de main file wordt gespecifieerd welke csv file gebruikt moet worden, waarbij de gebruiker keuze heeft uit vier verschillende bestanden:
+
+ukraine_borders.csv
+russia_borders.csv
+china_borders.csv
+usa_borders.csv
+
+Als eerste stap wordt de informatie uit de csv bestanden opgehaald om de provincie objecten mee te initialiseren en te bewaren in een dictionary, waarbij de de naam van de provincie wordt gebruikt als key voor de betreffende provincie. Daarna worden de provincies meegegeven aan de drie verschillende algoritmen: depthfirst, Wellsh Powell (greedy) en hillclimber. De uitkomsten kunnen met elkaar worden vergeleken door middel van de plots die zijn opgeslagen in de results map
+.
