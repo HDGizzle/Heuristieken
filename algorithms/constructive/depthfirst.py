@@ -21,8 +21,6 @@ def low_variance_picker(possible, usage):
             return sendtype
     if possible:
         return possible[0]
-    else:
-        return None
 
 
 def depth_first(provinces, senders, combinations):
@@ -99,8 +97,6 @@ def depth_first(provinces, senders, combinations):
 
             # assign available sender type based on usage
             sender = low_variance_picker(sender_types, usage)
-            if not sender:
-                continue
             provinces[province].sender = senders[sender]
             usage[sender] += 1
 

@@ -72,11 +72,12 @@ Kemerovo,"Gorno-Altay, Khakass, Altay, Krasnoyarsk, Novosibirsk, Tomsk"
 Novosibirsk,"Altay, Kemerovo, Omsk, Tomsk"
 Omsk,"Novosibirsk, Tomsk, Tyumen'"
 Tomsk,"Krasnoyarsk, Kemerovo, Novosibirsk, Omsk, Tyumen', Khanty-Mansiy"
-Sakha,"Zabaykal'ye, Krasnoyarsk, Amur, Irkutsk, Maga Buryatdan, Chukot"
+Sakha,"Zabaykal'ye, Krasnoyarsk, Amur, Irkutsk, Maga Buryatdan, Chukot, Khabarovsk"
 Kamchatka,"Chukot, Maga Buryatdan, Sakhalin"
-Primor'ye,
-Amur,"Sakha, Zabaykal'ye, Yevrey"
-Maga Buryatdan,"Sakha, Kamchatka, Chukot"
-Sakhalin,Kamchatka
-Yevrey,Amur
+Primor'ye,Khabarovsk
+Amur,"Sakha, Zabaykal'ye, Yevrey, Khabarovsk"
+Maga Buryatdan,"Sakha, Kamchatka, Chukot, Khabarovsk"
+Sakhalin,"Kamchatka, Khabarovsk"
+Yevrey,"Amur, Khabarovsk"
 Chukot,"Sakha, Kamchatka, Maga Buryatdan"
+Khabarovsk,"Maga Buryatdan, Amur, Sakha, Yevrey, Primor'ye, Sakhalin"
