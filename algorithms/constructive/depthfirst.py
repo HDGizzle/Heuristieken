@@ -21,6 +21,8 @@ def low_variance_picker(possible, usage):
             return sendtype
     if possible:
         return possible[0]
+    else:
+        return None
 
 
 def depth_first(provinces, senders, combinations):
@@ -101,7 +103,7 @@ def depth_first(provinces, senders, combinations):
             usage[sender] += 1
 
 
-            # keep track of outcome
+        # keep track of outcome
         outcome = check.save_outcome(provinces)
 
         costs.append(check.advanced_costs(senders, outcome))
@@ -109,10 +111,11 @@ def depth_first(provinces, senders, combinations):
 
 
         # check if outcome is more efficient than benchmark
-        if check.enhanced_distribution(outcome, benchmark):
-            benchmark = outcome
-            seed = i
-            bestusage = usage
+        if check.validity_check(provinces):
+            if check.enhanced_distribution(outcome, benchmark):
+                benchmark = outcome
+                seed = i
+                bestusage = usage
 
     print(benchmark)
     print(bestusage)
