@@ -138,3 +138,7 @@ def depth_first(provinces, senders, combinations, title):
     print("Best Cost Seed:", seed)
     print("Best Cost Frequencies:", bestusage)
     outcome_plotter.plotter(costs, "Advanced Costs", "results/adv_costs" + title[:-12] + ".png", combinations)
+    mapplotter(benchmark)
+    mapplotterRUSSIA(benchmark)
+    mapplotterCHINA(benchmark)
+    mapplotterUKR(benchmark)
