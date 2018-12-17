@@ -18,7 +18,7 @@ import initialiser as init
 import state_space as state
 
 # define global variables
-INPUT_CSV = 'china_borders.csv'
+INPUT_CSV = 'russia_borders.csv'
 PROVINCES = init.province_initialiser(INPUT_CSV)
 SENDERS = init.sender_initialiser()
 
@@ -39,7 +39,7 @@ if __name__ == "__main__":
     # uses the wellsh powel function to test different variations of pool sorts
 
     # welsh_powell_variation(province_pools, PROVINCES, SENDERS)
-    depth_first(PROVINCES, SENDERS, 1000)
+    depth_first(PROVINCES, SENDERS, 100000)
 
 
 
