@@ -211,11 +211,11 @@ def lower_adv_costs(senders, outcome, benchmark):
         return False
 
 
-def cost_scheme(provinces, outcome):
+def cost_scheme(provinces, senders, outcome):
     """
     retrieves the respective cost scheme
     """
-    lowest_cost = total_costs(provinces, outcome)
+    lowest_cost = total_costs(senders, outcome)
     for i in range(4):
         all_costs = 0
         for province in outcome:
