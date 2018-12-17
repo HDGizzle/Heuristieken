@@ -17,5 +17,7 @@ russia_borders.csv
 china_borders.csv
 usa_borders.csv
 
-Als eerste stap wordt de informatie uit de csv bestanden opgehaald om de provincie objecten mee te initialiseren en te bewaren in een dictionary, waarbij de de naam van de provincie wordt gebruikt als key voor de betreffende provincie. Daarna worden de provincies meegegeven aan de drie verschillende algoritmen: depthfirst, Wellsh Powell (greedy) en hillclimber. De uitkomsten kunnen met elkaar worden vergeleken door middel van de plots die zijn opgeslagen in de results map
-.
+Als eerste stap wordt de informatie uit de csv bestanden opgehaald om de provincie objecten mee te initialiseren en te bewaren in een dictionary, waarbij de de naam van de provincie wordt gebruikt als key voor de betreffende provincie. Daarna worden de provincies meegegeven aan de drie verschillende algoritmen: depthfirst, Wellsh Powell (greedy) en hillclimber. De functies kunnen met elkaar worden vergeleken door middel van de plots die zijn opgeslagen in de results map.
+
+## objects
+De objects map bevat de py bestanden waarmee de klassen zenders en provincies mee kunnen worden aangeroepen. De map bevat een beschrijving van de eigenschappen van deze klassen.
