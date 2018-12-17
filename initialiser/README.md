@@ -1,9 +1,3 @@
 # Initialiser 
 
-The initialiser file contains multiple functions to solve the problem of Radio Russia stated as follows:
-
-1. Creates a dictionary that contains the provinces and the sender assigned sendertype.
-2. Initializes all province objects and adds them global dictionary provinces are imported from csv files
-3. Initializes seven sendertypes and adds them to dictionary
-4. Puts provinces in sorted lists based on the shared amount of connections
-5. Returns the total amount of costs given the senders placed
+Initialiser.py gebruikt de csv input om de provincie objecten te initialiseren en maakt apart alle zeven verschillende zenderobjecten aan met de kosten onder de vier verschillende schema's. Zowel de provincie- als zenderobjecten worden in een dictionary opgeslagen en op deze manier teruggegeven op de plek waar de initialiser functie is aangeroepen. Verder wordt in initialiser een lijst met poelen van provincienamen aangemaakt, waar poelen bestaan uit provincies met een gelijk aantal buren.
