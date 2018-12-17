@@ -1,13 +1,12 @@
 Welsh Powell Algorithm
 =======================
 
-The Welsh Powell Algorithm is a suitable algortihm for the four-colour problem, which is comparable to the Radio Russia Problem.
-The Welsh Powell Algorithm is a greedy algorithm that lists all the nodes based on hwo many nodes they are connected with.
-The algorithm is based on the following steps:
+Wellsh Powell wordt gebruikt als algoritme voor het vinden van oplossingen van kleurenproblemen, welke vergelijk is met Radio Russia.
+Wellsh Powell is een greedy algoritme en deelt per zender eerst landen toe met de meeste verbindingen. Het algoritme is gebaseerd op de volgende stappen
 
-1. Find the valence of each vertex (number of edges that are meeting at that vertex)
-2. List the vertices in order of descending valence (you can break ties any way you wish)
-3. Color the vertex in the list (the vertex with the highest valence) with color 1
-4. Go down the list and color every vertex not connected to the colored vertices above the same colour. Then cross out alle coloured vertices in the list
-5. Repeat the process on the uncoloured vertices with a new colour - always working in descending order of valence until all vertices have been coloured
+1. Kijk naar het aantal verbindingen/aangelegen provincies per provincie
+2. Sorteer de provincies gebaseerd op het aantal verbindingen
+3. Per zender plaats het betreffende type in de eerstmogelijke provincie met het meeste verbindingen
+4. Ga verder met de volgende provincies met de meeste verbindingen welke nog niet grenst aan een provincie met het huidige zendertype en  plaats de zender. Verwijder vervolgens de provincie uit de lijst.
+5. Herhaal het proces met alle andere zendertypes totdat alle provincies een zender toebedeeld hebben gekregen
 (http://mrsleblancsmath.pbworks.com/w/file/fetch/46119304/vertex%20coloring%20algorithm.pdf)
