@@ -1,0 +1,11 @@
+All packages used are updated to the latest:
+
+cartopy
+matplotlib
+numpy
+pandas
+random
+os
+sys
+collections
+math
