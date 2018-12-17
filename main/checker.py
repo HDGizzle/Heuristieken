@@ -35,13 +35,27 @@ def validity_check(provinces):
     # iterate over provinces
     for province in provinces:
 
-        # check if neighbor has same sendertype and senders are placed
-        for neighbor in provinces[province].neighbors:
-            if provinces[neighbor].sender == provinces[province].sender:
-                valid = False
+        # guard for lacking sender in province
+        if provinces[province].sender:
 
-            elif not provinces[neighbor].sender:
-                valid = False
+            # check if neighbor has same sendertype and senders are placed
+            for neighbor in provinces[province].neighbors:
+
+                # guard for lacking sender in province
+                if provinces[neighbor].sender:
+
+                    if provinces[neighbor].sender == provinces[province].sender:
+                        valid = False
+
+                # sender missing, no valid outcome
+                else:
+                    valid = False
+                    return valid
+
+        # sender missing, no valid outcome
+        else:
+            valid = False
+            return valid
 
     # returns the outcome of the check
     return valid
