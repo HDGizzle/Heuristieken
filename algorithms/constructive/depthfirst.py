@@ -1,6 +1,5 @@
 import os
 import sys
-import math
 basepath = os.path.abspath(os.path.curdir).split("Heuristieken")[0] + "Heuristieken"
 sys.path.append(os.path.join(basepath, "main"))
 sys.path.append(os.path.join(basepath, "visualiser"))
@@ -133,12 +132,10 @@ def depth_first(provinces, senders, combinations, title):
                 seed = i
                 bestusage = usage
 
+    print("DEPTH FIRST INFO")
     print(benchmark)
     print(bestusage)
     print("Best Cost Seed:", seed)
     print("Best Cost Frequencies:", bestusage)
     outcome_plotter.plotter(costs, "Advanced Costs", "results/adv_costs" + title[:-12] + ".png", combinations)
-    mapplotter(benchmark)
-    mapplotterRUSSIA(benchmark)
-    mapplotterCHINA(benchmark)
-    mapplotterUKR(benchmark)
+    return benchmark
