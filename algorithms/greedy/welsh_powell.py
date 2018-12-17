@@ -28,36 +28,24 @@ def welsh_powell(province_pools, provinces, senders):
 
     # iterates over senders
     for sender in senders:
+"""
+this function uses the Welsh Powell algorithm to find a solution for the
+placing of senders in provinces under color graphing constraints
+http://mrsleblancsmath.pbworks.com/w/file/fetch/46119304/vertex%20coloring%20algorithm.pdf
+"""
 
-        # iterates over province pools
-        for connection in connections:
-
-            # iterates over provinces in province pools
-            province_pool = province_pools[connection]
-            for province_name in province_pool:
-
-                # extracts province object
-                province = provinces[province_name]
-
-                # check for presence of sender in neighbor
-                present = False
-
-                # iterate over neighbors
-                for neighbor in province.neighbors:
-
-                    # check if sender neighbor corresponds to current sender
-                    if provinces[neighbor].sender:
-                        if provinces[neighbor].sender.type == sender:
-                            present = True
-
-                # place sender if sender is not in neighbors
-                if not present and not province.sender:
-
-                    # place sender
-                    province.sender = senders[sender]
+# import other classes
+import os
+import sys
+basepath = os.path.abspath(os.path.curdir).split("Heuristieken")[0] + "Heuristieken"
+sys.path.append(os.path.join(basepath, "main"))
+sys.path.append(os.path.join(basepath, "visualiser"))
+import outcome_plotter
+import checker as check
+import math
 
 
-def welsh_powell_variation(province_pools, provinces, senders):
+def welsh_powell_variation(province_pools, provinces, senders, title):
     """
     uses a dictionary containing pools of provinces with the same amount of
     neighbors and sorts the contents of the pool by shifting each province one
@@ -112,7 +100,6 @@ def welsh_powell_variation(province_pools, provinces, senders):
 
     # keep track of variations and costs for plotting
     costs = []
-    variances = []
 
     # keep track of iterations for plotting
     combinations = 0
@@ -161,5 +148,50 @@ def welsh_powell_variation(province_pools, provinces, senders):
             benchmark_variance = outcome
 
     # plot histogram
-    outcome_plotter.plotter(costs, "Costs", "costplotWelsh.png", combinations)
+    outcome_plotter.plotter(costs, "Costs Welsh Powell", "results/welsh_costs"
+                            + title + ".png", combinations)
     return benchmark_costs, benchmark_variance
+
+
+def welsh_powell(province_pools, provinces, senders):
+    """
+    places senders first in provinces with most connections working as a greedy
+    algorithm
+    """
+
+    # clear senders
+    check.provinces_reset(provinces)
+
+    # lists all numbers of connections from high to low
+    connections = sorted(province_pools, reverse=True)
+
+    # iterates over senders
+    for sender in senders:
+
+        # iterates over province pools
+        for connection in connections:
+
+            # iterates over provinces in province pools
+            province_pool = province_pools[connection]
+            for province_name in province_pool:
+
+                # extracts province object
+                province = provinces[province_name]
+
+                # check for presence of sender in neighbor
+                present = False
+
+                # iterate over neighbors
+                for neighbor in province.neighbors:
+
+                    # check if sender neighbor corresponds to current sender
+                    if provinces[neighbor].sender:
+                        if provinces[neighbor].sender.type == sender:
+                            present = True
+
+                # place sender if sender is not in neighbors
+                if not present and not province.sender:
+
+                    # place sender
+                    province.sender = senders[sender]
+
