@@ -1,4 +1,14 @@
 Depth First Algorithm
 =====================
 
-For the Radio Russia problem, we used the Depth First algorithm. This algorithm searches the graph systematically and ensuring to search every province or state. For this assignment, states, oblasts and provinces are seen as nodes of an undirected graph. This is done by keeping track of a visited set and a stack. When all nodes are visited, they should be present in the visited list. This ensures that every province or state has been visited. The stack is created to track the nodes of the graph and is used to hold visited vertices.
+Het algoritme doorzoekt systematisch alle oplossingen binnen de state space en gaat daarbij stap voor stap alle provincies af. Provincies worden gezien als nodes in een niet vantevoren vastgesteld pad. Het pad wordt bijgehouden door middel van een stack en een visited set. Als de stack leeg is, is er sprake van een uitkomst, aangezien dan alle provincies zijn bezocht. 
+
+LET OP:
+De gebruiker heeft keuze uit twee heuristieke functies voor het kiezen van een zender:
+1) low_variance_picker
+of 
+2) low_cost_picker
+
+De eerste functie zorgt voor een gelijke verdeling in het gebruik van zenders en de tweede zorgt ervoor dat goedkope zenders voorrang krijgen in het plaatsen van zenders. 
+
+Daarnaast kunnen de uitkomsten vergeleken worden met de functies enhanced_distribution of lower_costs uit checker.py
