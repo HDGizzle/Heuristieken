@@ -22,12 +22,30 @@ def low_variance_picker(possible, usage):
     if possible:
         return possible[0]
     else:
-        # outcome will not be valid, but also not saved, because validity check
-        # is used
+        """
+        outcome will not be valid, but also not saved, because validity check
+        is used
+        """
         return 1
 
 
-def depth_first(provinces, senders, combinations):
+def low_cost_picker(possible, usage):
+    """
+    sorts senders based on type. Lowest sender type is always cheapest and is
+    this therefore preferred
+    """
+    possible = sorted(possible)
+    if possible:
+        return possible[0]
+    else:
+        """
+        outcome will not be valid, but also not saved, because validity check
+        is used
+        """
+        return 1
+
+
+def depth_first(provinces, senders, combinations, title):
     """
     depth first is used to try out a given amount of combinations and finds
     outcomes with either the lowest variance or costs
@@ -100,28 +118,23 @@ def depth_first(provinces, senders, combinations):
                         sender_types.remove(provinces[neighbor].sender.type)
 
             # assign available sender type based on usage
-            sender = low_variance_picker(sender_types, usage)
+            sender = low_cost_picker(sender_types, usage)
             provinces[province].sender = senders[sender]
             usage[sender] += 1
-
 
         # keep track of outcome
         outcome = check.save_outcome(provinces)
 
-        costs.append(check.advanced_costs(senders, outcome))
-        # variances.append(math.sqrt(check.sender_variance(outcome)))
-
-
         # check if outcome is more efficient than benchmark
         if check.validity_check(provinces):
-            if check.enhanced_distribution(outcome, benchmark):
+            costs.append(check.advanced_costs(senders, outcome))
+            if check.lower_adv_costs(senders, outcome, benchmark):
                 benchmark = outcome
                 seed = i
                 bestusage = usage
 
     print(benchmark)
     print(bestusage)
-    print("Best Variance Seed:", seed)
-    print("Best Variance Frequencies:", bestusage)
-    outcome_plotter.plotter(costs, "Costs", "results/costsadvUkraine.png", combinations)
-    # outcome_plotter.plotter(costs, "costs", "costplot.png")
+    print("Best Cost Seed:", seed)
+    print("Best Cost Frequencies:", bestusage)
+    outcome_plotter.plotter(costs, "Advanced Costs", "results/adv_costs" + title[:-12] + ".png", combinations)

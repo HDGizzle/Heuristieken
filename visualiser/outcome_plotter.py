@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import matplotlib.pylab as pylab
-import numpy as np
+
 
 # in order: (variances or costs, x axis text, save as filename, combinations)
 def plotter(data_list, xlabel, png_name, combinations):
@@ -25,7 +25,6 @@ def plotter(data_list, xlabel, png_name, combinations):
     for i in range(bars):
 
         bar_division = round((((max - min) / bars) * i) + min, 2)
-        # bar_division = round(max * (i + 1) / bars, 2)
 
         # minimum value in bar is used as bar key
         bars_dict[str(bar_division)] = 0
@@ -44,17 +43,14 @@ def plotter(data_list, xlabel, png_name, combinations):
                 break
 
     # plot function
-
     params = {'legend.fontsize': 'x-large',
-          'figure.figsize': (12, 7),
-         'axes.labelsize': 'x-large',
-         'axes.titlesize':'x-large',
-         'xtick.labelsize':'small',
-         'ytick.labelsize':'x-large'}
+              'figure.figsize': (12, 7),
+              'axes.labelsize': 'x-large',
+              'axes.titlesize': 'x-large',
+              'xtick.labelsize': 'small',
+              'ytick.labelsize': 'x-large'}
+
     pylab.rcParams.update(params)
-
-
-
 
     plt.bar(bars_dict.keys(), bars_dict.values(), color="g")
     plt.xticks(rotation=40)
@@ -62,6 +58,3 @@ def plotter(data_list, xlabel, png_name, combinations):
     plt.ylabel("Frequency")
     plt.title("Number of iterations: " + str(combinations))
     plt.savefig(png_name)
-    plt.show()
-
-    print(max)
