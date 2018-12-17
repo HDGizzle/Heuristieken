@@ -18,7 +18,7 @@ import initialiser as init
 import state_space as state
 
 # define global variables
-INPUT_CSV = 'usa_borders.csv'
+INPUT_CSV = 'china_borders.csv'
 PROVINCES = init.province_initialiser(INPUT_CSV)
 SENDERS = init.sender_initialiser()
 
