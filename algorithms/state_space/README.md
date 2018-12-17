@@ -1,7 +1,7 @@
 State Space
 ===========
 
-Deze file bevat 3 objectieve functies voor het bepalen van de minimale en maximale zendertypes nodig en het vinden van kostengrenzen
+Deze file bevat 3 objectieve functies voor het bepalen van de minimale en maximale zendertypes nodig en het vinden van kostengrenzen. Daarnaast wordt er een beschrijving gegeven van de omvang van de state space en de bounds van kosten en zendergebruik voor de uitkomsten
 
 ## Objectieve functie clusters:
 De maximale hoeveelheid provincies in een cluster (een cluster is een groep provincies die allemaal aan elkaar grenzen)
@@ -44,5 +44,25 @@ Verenigde Staten: 4.4
 Rusland: 4.5
 China: 3.9
 
-Voor elk land is er ook een nog een upperbound te berekenen voor het plaatsen van zenders in hun provincies of staten.
-De volgende upperbounds zijn berekend aan de hand van dat eer zeven mogelijke zendertypes zijn en en ik elke provincie waarin elk zender type geplaatst kan worden.
+Er kan worden geconcludeerd dat clusters alleen niet voldoende verklarend is en het gemiddeld aantal connecties ook een rol speelt. Voor alle landen op China na is het gemiddeld aantal connecties ook hoger dan vier. Dit suggereert dat er wellicht alleen voor China een driezenderoplossing gevonden kan worden.
+
+De upperbound voor alle vier de landen is hetzelfde, alle zeven zendertypes worden dan gebruikt.
+Oekraïne: 7
+Verenigde Staten: 7
+Rusland: 7
+China: 7
+
+## Bounds voor kosten:
+De bounds voor kostenuitkomsten zijn berekend onder relaxte constraints, namelijk dat aan elkaar grenzende provincies wel hetzelfde zendertype mogen gebruiken. De goedkoopste uitkomst is dan dat in elke provincie zendertype "A" uit kostenschema 4 wordt gebruikt en de duurste uitkomst gebruikt in elke provincie zendertype "G" uit kostenschema 4.
+
+Lowerbound:
+Oekraïne: 72
+Verenigde Staten: 150
+Rusland: 243
+China: 102
+
+Upperbound:
+Oekraïne: 1392
+Verenigde Staten: 2900
+Rusland: 4698
+China: 1972
