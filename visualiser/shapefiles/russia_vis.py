@@ -14,7 +14,7 @@ def mapplotterRUSSIA(benchmark):
 
     map = plt.subplot(projection=ccrs.Mercator())
 
-    def map_russia_visualisation(ax, extent=(25, 180, 80, 40), **kwargs):
+    def map_russia_visualisation(ax):
 
         shapefile = 'RUS_adm1.shp'
         reader = shapereader.Reader(shapefile)
@@ -26,8 +26,7 @@ def mapplotterRUSSIA(benchmark):
         #         None    blue       green      purple    orange     red
         colors = [None, '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#e41a1c']
 
-        ax.plot(60, 56, ms=20, **kwargs)
-        ax.set_extent(extent)
+        ax.set_extent([25, 180, 80, 40])
         ax.coastlines(resolution='50m')
         ax.add_feature(cfeature.BORDERS, linestyle='-', alpha=.5)
         ax.add_feature(cfeature.LAND)
@@ -55,4 +54,4 @@ def mapplotterRUSSIA(benchmark):
         plt.legend(handles=[senderA, senderB, senderC, senderD, senderE])
         pylab.savefig('results/russiamap.png')
 
-    map_russia_visualisation(map, transform=ccrs.PlateCarree())
+    map_russia_visualisation(map)
