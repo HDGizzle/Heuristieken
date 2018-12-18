@@ -14,7 +14,7 @@ def mapplotterCHINA(benchmark):
 
     map = plt.subplot(projection=ccrs.Mercator())
 
-    def map_china_visualisation(ax, extent=(70, 160, 5, 50), **kwargs):
+    def map_china_visualisation(ax):
 
         shapefile = 'CHN_adm1.shp'
 
@@ -27,8 +27,7 @@ def mapplotterCHINA(benchmark):
         #         None     blue       green     purple    orange        red
         colors = [None, '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#e41a1c']
 
-        ax.plot(60, 56, 'r*', ms=20, **kwargs)
-        ax.set_extent(extent)
+        ax.set_extent([70, 160, 5, 50])
         ax.coastlines(resolution='50m')
         ax.add_feature(cfeature.BORDERS, linestyle='-', alpha=.5)
         ax.add_feature(cfeature.LAND)
@@ -56,4 +55,4 @@ def mapplotterCHINA(benchmark):
         plt.legend(handles=[senderA, senderB, senderC, senderD, senderE])
         pylab.savefig('results/chinamap.png')
 
-    map_china_visualisation(map, transform=ccrs.PlateCarree())
+    map_china_visualisation(map)
