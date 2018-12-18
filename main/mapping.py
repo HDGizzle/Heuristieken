@@ -46,12 +46,12 @@ if __name__ == "__main__":
     welsh_powell_variation(province_pools, PROVINCES, SENDERS)
     
     # uses depth first to test the different variations in sender placing
-    benchmark = depth_first(PROVINCES, SENDERS, 1000)
-
-    # this can be clicked to show the colored maps according to the created dictionary with states and sendertypes
-    # mapplotterUKRbenchmark)
-    # mapplotter(benchmark)
-    # mapplotterCHINA(benchmark)
+    benchmark = depth_first(PROVINCES, SENDERS, 10000)
+    # Select the maplotter of the land the you have chosen for INPUT_CSV to
+    # show the colored map belonging to the data.
+    # mapplotterUKR(benchmark)
+    # mapplotterUSA(benchmark)
+    mapplotterCHINA(benchmark)
     # mapplotterRUSSIA(benchmark)
 
     def total_costs(provinces):
