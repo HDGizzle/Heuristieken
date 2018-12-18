@@ -36,7 +36,7 @@ def mapplotterRUSSIA(benchmark):
         for i in range(len(adm1_shapes)):
             province = next(provinces)
             state = province.attributes['NAME_1']
-            if benchmark.get(state) == None:
+            if benchmark.get(state) is None:
                 ax.add_geometries(adm1_shapes[i], ccrs.PlateCarree(),
                 facecolor="#d6d6c2",
                 edgecolor="black")
