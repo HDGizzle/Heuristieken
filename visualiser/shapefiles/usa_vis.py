@@ -10,11 +10,11 @@ import matplotlib.patches as mpatches
 from matplotlib import pylab
 
 
-def mapplotter(benchmark):
+def mapplotterUSA(benchmark):
 
     map = plt.subplot(projection=ccrs.Mercator())
 
-    def map_usa_visualisation(ax, extent=(-125, -66.5, 20, 55), **kwargs):
+    def map_usa_visualisation(ax):
 
         shapefile = 'ne_110m_admin_1_states_provinces.shp'
         reader = shapereader.Reader(shapefile)
@@ -26,8 +26,7 @@ def mapplotter(benchmark):
         #         None    blue       green     purple    orange,     red
         colors = [None, '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#e41a1c']
 
-        ax.plot(60, 56, 'r*', ms=20, **kwargs)
-        ax.set_extent(extent)
+        ax.set_extent([-125, -66.5, 20, 55])
         ax.coastlines(resolution='50m')
         ax.add_feature(cfeature.BORDERS, linestyle='-', alpha=.5)
         ax.add_feature(cfeature.LAND)
@@ -49,4 +48,4 @@ def mapplotter(benchmark):
         plt.legend(handles=[senderA, senderB, senderC, senderD, senderE])
         pylab.savefig('results/usamap.png')
 
-    map_usa_visualisation(map, transform=ccrs.PlateCarree())
+    map_usa_visualisation(map)
