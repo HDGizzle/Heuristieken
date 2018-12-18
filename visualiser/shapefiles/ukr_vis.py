@@ -13,7 +13,7 @@ def mapplotterUKR(benchmark):
 
     map = plt.subplot(projection=ccrs.Mercator())
 
-    def map_ukr_visualisation(ax, extent=(20, 45, 40, 54), **kwargs):
+    def map_ukr_visualisation(ax):
 
         shapefile = 'UKR_adm1.shp'
         reader = shapereader.Reader(shapefile)
@@ -25,8 +25,7 @@ def mapplotterUKR(benchmark):
         #           None    blue       green     purple    orange     red
         colors = [None, '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', 'e41a1c']
 
-        ax.plot(60, 56, ms=20, **kwargs)
-        ax.set_extent(extent)
+        ax.set_extent([20, 45, 40, 54])
         ax.coastlines(resolution='50m')
         ax.add_feature(cfeature.BORDERS, linestyle='-', alpha=.5)
         ax.add_feature(cfeature.LAND)
@@ -54,4 +53,4 @@ def mapplotterUKR(benchmark):
         plt.legend(handles=[senderA, senderB, senderC, senderD, senderE])
         pylab.savefig('results/ukrainemap.png')
 
-    map_ukr_visualisation(map, transform=ccrs.PlateCarree())
+    map_ukr_visualisation(map)
